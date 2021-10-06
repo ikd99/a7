@@ -1,6 +1,5 @@
 # a7
 ## Start
-----
 ```
 python manage.py runserver
 ```
