@@ -22,8 +22,8 @@ class request(models.Model):
   destination_place = models.CharField(max_length=100, null=False)
   delivery_date = models.DateTimeField(null=False)
   asking_price = models.IntegerField(null=False)
-  driver_evaluation = models.FloatField()
-  client_evaluation = models.FloatField()
+  driver_evaluation = models.FloatField(null=True)
+  client_evaluation = models.FloatField(null=True)
 
 class message(models.Model):
   user_id = models.ForeignKey(user_info, on_delete=models.SET_NULL, null=True)
