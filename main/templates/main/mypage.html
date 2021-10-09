@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <title>mypage</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  </head>
+  <body>
+    <h1>mypage</h1>
+    <tr>
+      {% for col in header %}
+      <th>{{ col }}</th>
+      {% endfor %}
+    </tr>
+    <table>
+      <tr>
+        <td>{{ user.user_name }}</td>
+        <td>{{ user.is_driver }}</td>
+        <td>{{ user.region }}</td>
+        <td>{{ user.total_score }}</td>
+      </tr>
+    </table>
+  </body>
+</html>

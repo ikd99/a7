@@ -1,5 +1,5 @@
 from django.shortcuts import redirect, render
-from .models import requests, user_info
+from .models import requests, user_info, favorite
 from .form import PostAdd
 
 # Create your views here.
@@ -31,3 +31,12 @@ def post(request):
         'message': message,
     }
     return render(request, 'main/post.html', modelform_dict)
+
+def getMyPage(request):
+    header = ['ユーザー名', 'ドライバーか', '地域']
+    my_dict ={
+        'header': header,
+        'user' : user_info.objects.get(id=1),
+        'favorite': favorite.objects.get(id=1)
+    }
+    return render(request, 'main/mypage.html', my_dict)
