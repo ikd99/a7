@@ -1,15 +1,28 @@
 from django.shortcuts import redirect, render
-from .models import request  # import追加
+from .models import requests, user_info
 from .form import PostAdd
 
 # Create your views here.
-def create(request):
+def index(request):
+    posts = requests.objects.all()
+    users = user_info.objects.all()
+    header = ['ID','タイトル','目的地','出発地','日付','テキスト']
+    my_dict2 = {
+        'title':'タイトル',
+        'posts': posts,
+        'users': users,
+        'header': header,
+    }
+    return render(request, 'main/index.html', my_dict2)
+
+
+def post(request):
     message = ''
     if (request.method == 'POST'):
         form = PostAdd(request.POST)
         if (form.is_valid()):
             form.save()
-            return redirect(to='/index')
+            return redirect(to='/')
         else:
             message = "再入力してください"
     modelform_dict = {
@@ -17,4 +30,4 @@ def create(request):
         'form': PostAdd(),
         'message': message,
     }
-    return render(request, 'post/create.html', modelform_dict)
+    return render(request, 'main/post.html', modelform_dict)
