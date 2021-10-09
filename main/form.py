@@ -8,9 +8,9 @@ class PostAdd(forms.ModelForm):
         fields = ['title', 'share_or_not', 'text', 'departure_place', 'destination_place', 'delivery_date', 'asking_price']
         labels={
             'title':"タイトル",
-            'text':"内容",
             'departure_place':"出発地",
             'destination_place':"目的地",
-            'delivery_date':"配達日",
-            'asking_price':"希望価格(円)"
+            'delivery_date':"配達希望日",
+            'asking_price':"希望価格(円)",
+            'text':"詳細"
         }
