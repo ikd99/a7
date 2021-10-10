@@ -7,13 +7,19 @@
     <title>MatchingDjangoApp</title>
     <link rel="stylesheet" href="{% static "css/styles.css" %}" />
     <script src="{% static 'javascript/sample.js' %}"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   </head>
 
     <body>
       <header>
-        <h1><a href="index.html">SAMPLE</a></h1>
+        <!-- aタグのhrefは後から調整する -->
+        <div class="logo"><a href="">SAMPLE</a></div>
+        <div class="sp-menu">
+          <span class="material-icons" id="icons">menu</span>
+        </div>
       </header>
       <main>
+        <div class="header-main"></div>
         {% block mainblock %}
 
         {% endblock %}
@@ -21,10 +27,34 @@
       <footer>
         <nav class="pc-nav">
           <ul>
-             <li><a href="#">ホーム</a></li>
-             <li><a href="#">投稿</a></li>
-             <li><a href="#">履歴</a></li>
-             <li><a href="#">マイページ</a></li>
+            <li>
+              <a href="{% url 'main:chat' %}">
+                <span class="material-icons" id="home">
+                  home
+                </span>
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'main:chat' %}">
+                <span class="material-icons" id="post_add">
+                  post_add
+                </span>
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'main:chat' %}">
+                <span class="material-icons" id="message">
+                  message
+                </span>
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'main:chat' %}">
+                <span class="material-icons" id="person">
+                  person
+                </span>
+              </a>
+            </li>
           </ul>
        </nav>
       </footer>

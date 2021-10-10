@@ -1,3 +1,4 @@
+/* ヘッダーとフッターのcss */
 body {
   margin: 0;
   padding: 0;
@@ -8,51 +9,68 @@ body {
 
 header {
   width: 100%;
-  background: #b1b1b1;
-  display: flex; /* flexboxを作る */
-  align-items: center; /* 上下中央に揃える */
-  justify-content: space-between; /* 両端に配置 */
+  background: #d3d3d3;
+  display: flex; 
+  align-items: center; 
+  justify-content: space-between; 
   padding-left: 30px;
   padding-right: 30px;
   position: fixed;
-  top: 0px;                   /* 位置(上0px) */
-  left: 0px;                  /* 位置(右0px) */
-  width: 100%;                /* 横幅100%　*/
+  top: 0px;                  
+  left: 0px;                
+  width: 100%;             
   height: 200px;   
   box-sizing: border-box;
 }
 
+.logo {
+  margin-right: auto;
+}
+
+.logo a {
+  color: #1a1a1a;
+  font-size: 40px;
+  font-weight: bolder;
+}
+
+.sp-menu {
+  margin-left: auto;
+}
+
+.pc-nav {
+  width: 100%;
+}
+
+#icons,  #post_add, #home, #message, #person{
+  font-size: 100px;
+}
+
+.header-main {
+  height: 200px;
+}
+
 footer {
-  background: #b1b1b1;
-  display: flex; /* flexboxを作る */
-  align-items: center; /* 上下中央に揃える */
-  justify-content: space-between; /* 両端に配置 */
+  background: #d3d3d3;
+  display: flex; 
+  align-items: center; 
+  justify-content: space-between; 
   padding-left: 30px;
   padding-right: 30px;
-  position: fixed;            /* フッターの固定 */
-  bottom: 0px;                /* 位置(下0px) */
-  left: 0px;                  /* 位置(左0px) */
-  width: 100%;                /* 横幅100%　*/
-  height: 200px;              /* 縦幅140px */
+  position: fixed;           
+  bottom: 0px;               
+  left: 0px;                 
+  width: 100%;              
+  height: 200px;            
   box-sizing: border-box;
 }
 
-h1 a {
-  color: #1a1a1a;
-  font-size: 40px;
-  text-decoration: none;
-}
 ul {
   list-style: none;
   display: flex;
   justify-content: space-evenly;
   height: 100%;
-  /* width: 100%; */
 }
-nav {
-  width: 100%;
-  height: 100%;
-}
+
 ul a {
   width: 100%;
   height: 100%;
@@ -77,8 +95,8 @@ li {
 }
 nav {
   vertical-align: middle;
+  width: 100%;
+  height: 100%;
 }
-.settings {
-  margin-left: auto;
-  margin-top: auto;
-}
+
+/* ヘッダーとフッターのcss */
