@@ -1,0 +1,25 @@
+{% extends "main/layout.html" %} 
+
+{% block mainblock %}
+
+<h1>依頼一覧</h1>
+<table>
+  <tr>
+    {% for col in header %}
+    <th>{{ col }}</th>
+    {% endfor %}
+  </tr>
+  {% for post in posts%}
+  <tr>
+    <td>{{ post.client_id }}</td>
+    <td>{{ post.title }}</td>
+    <td>{{ post.departure_place }}</td>
+    <td>{{ post.destination_place }}</td>
+    <td>{{ post.delivery_date }}</td>
+    <td>{{ post.text }}</td>
+    <td><a href="{% url 'main:chat' post.id %}">チャットする</a></td>
+  </tr>
+  {% endfor %}
+</table>
+
+{% endblock %}
