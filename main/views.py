@@ -1,6 +1,7 @@
 from django.shortcuts import redirect, render
 from .models import requests, user_info, favorite
 from .form import PostAdd
+from django.http import HttpResponse
 
 # Create your views here.
 def index(request):
@@ -43,3 +44,8 @@ def getMyPage(request):
 
 def chat(request):
     return render(request, 'main/chat.html')
+
+def top_share(request):
+    all_user_info = user_info.objects.all()
+    context = {"all_user_info": all_user_info}
+    return render(request, "main/top_share.html", context)

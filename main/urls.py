@@ -7,4 +7,5 @@ urlpatterns = [
   path('post/', views.post, name='post'),
   path('mypage/', views.getMyPage, name='mypage'),
   path('chat/', views.chat, name='chat'),
+  path('top_share/', views.top_share, name='top_share'),
 ]
