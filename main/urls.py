@@ -3,7 +3,9 @@ from . import views
 
 app_name='main'
 urlpatterns = [
-  path('', views.index, name='index'),
+  path('index/', views.index, name='index'),
   path('post/', views.post, name='post'),
-  path('mypage/', views.getMyPage, name='mypage')
+  path('mypage/', views.getMyPage, name='mypage'),
+  path('', views.top_share, name='top_share'),
+  path('chat/', views.chat, name='chat'),
 ]

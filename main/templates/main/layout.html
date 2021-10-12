@@ -1,0 +1,73 @@
+{% load static %}
+{% load django_bootstrap5 %}
+<!doctype html>
+<html lang="ja">
+
+  <head>
+    <meta charset="utf-8">
+    <title>MatchingDjangoApp</title>
+    <link rel="stylesheet" href="{% static "css/styles.css" %}" />
+    <script src="{% static 'javascript/sample.js' %}"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+  </head>
+
+    <body>
+      <header>
+        <!-- aタグのhrefは後から調整する -->
+        <div class="logo"><a href="">SAMPLE</a></div>
+        <div class="sp-menu">
+          <span class="material-icons" id="icons">menu</span>
+        </div>
+        <ul>
+          {% if user.is_authenticated %}
+            <li><a href="{% url 'logout' %}">ログアウト</a></li>
+          {% else %}
+            <li><a href="{% url 'login' %}">ログイン</a></li>
+            <li><a href="{% url 'signup' %}">会員登録</a></li>
+          {% endif %}
+        </ul>
+      </header>
+      <main>
+        <div class="header-main"></div>
+        {% block mainblock %}
+
+        {% endblock %}
+      </main>
+      <footer>
+        <nav class="pc-nav">
+          <ul>
+            <li>
+              <a href="{% url 'main:chat' %}">
+                <span class="material-icons" id="home">
+                  home
+                </span>
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'main:chat' %}">
+                <span class="material-icons" id="post_add">
+                  post_add
+                </span>
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'main:chat' %}">
+                <span class="material-icons" id="message">
+                  message
+                </span>
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'main:chat' %}">
+                <span class="material-icons" id="person">
+                  person
+                </span>
+              </a>
+            </li>
+          </ul>
+       </nav>
+      </footer>
+    </body>
+</html>

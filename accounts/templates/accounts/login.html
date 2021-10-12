@@ -1,0 +1,13 @@
+{% extends 'main/layout.html' %}
+{% load django_bootstrap5 %}
+
+{% block mainblock %}
+<h1>Login</h1>
+
+<form method="post" action="{% url 'login' %}">
+    {% csrf_token %}
+    <input type="hidden" name="next" value="{{ next }}"/>
+    {% bootstrap_form form%}
+    {% bootstrap_button button_type="submit" content="ログイン" %}
+</form>
+{% endblock mainblock %}

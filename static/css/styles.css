@@ -1,0 +1,102 @@
+/* ヘッダーとフッターのcss */
+body {
+  margin: 0;
+  padding: 0;
+  color: #1a1a1a;
+  font-family: 'Noto Sans JP', sans-serif;
+  background: #f6f5f4;
+}
+
+header {
+  width: 100%;
+  background: #d3d3d3;
+  display: flex; 
+  align-items: center; 
+  justify-content: space-between; 
+  padding-left: 30px;
+  padding-right: 30px;
+  position: fixed;
+  top: 0px;                  
+  left: 0px;                
+  width: 100%;             
+  height: 200px;   
+  box-sizing: border-box;
+}
+
+.logo {
+  margin-right: auto;
+}
+
+.logo a {
+  color: #1a1a1a;
+  font-size: 40px;
+  font-weight: bolder;
+}
+
+.sp-menu {
+  margin-left: auto;
+}
+
+.pc-nav {
+  width: 100%;
+}
+
+#icons,  #post_add, #home, #message, #person{
+  font-size: 100px;
+}
+
+.header-main {
+  height: 200px;
+}
+
+footer {
+  background: #d3d3d3;
+  display: flex; 
+  align-items: center; 
+  justify-content: space-between; 
+  padding-left: 30px;
+  padding-right: 30px;
+  position: fixed;           
+  bottom: 0px;               
+  left: 0px;                 
+  width: 100%;              
+  height: 200px;            
+  box-sizing: border-box;
+}
+
+ul {
+  list-style: none;
+  display: flex;
+  justify-content: space-evenly;
+  height: 100%;
+}
+
+ul a {
+  width: 100%;
+  height: 100%;
+}
+ul li a {
+  padding: 10px 15px;
+  color: #1a1a1a;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 35px;
+  width: 100%;
+  height: 100%;
+}
+
+ul li a:hover {
+  text-decoration: underline;
+}
+
+li {
+  width: 100%;
+  margin: auto;
+}
+nav {
+  vertical-align: middle;
+  width: 100%;
+  height: 100%;
+}
+
+/* ヘッダーとフッターのcss */
