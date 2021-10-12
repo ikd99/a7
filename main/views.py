@@ -40,12 +40,6 @@ def getMyPage(request):
         'favorite': favorite.objects.get(id=1)
     }
     return render(request, 'main/mypage.html', my_dict)
-from django.shortcuts import render
-from django.shortcuts import redirect
-
-def top_share(request):
-    return render(request, 'main/top_share.html')
-
 
 def chat(request):
     return render(request, 'main/chat.html')
