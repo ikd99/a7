@@ -100,3 +100,12 @@ nav {
 }
 
 /* ヘッダーとフッターのcss */
+
+/* チャットのcss */
+.chat_home {
+  display: flex;
+}
+
+#chat_table {
+}
+/* チャットのcss */
