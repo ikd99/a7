@@ -6,5 +6,5 @@ urlpatterns = [
   path('', views.index, name='index'),
   path('post/', views.post, name='post'),
   path('mypage/', views.getMyPage, name='mypage'),
-  path('chat/', views.chat, name='chat'),
+  path('chat/<int:num>', views.chat, name='chat'),
 ]

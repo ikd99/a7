@@ -14,3 +14,6 @@ class PostAdd(forms.ModelForm):
             'asking_price':"希望価格(円)",
             'text':"詳細"
         }
+
+class TestForm(forms.Form):
+    text = forms.CharField(label='文字入力')
