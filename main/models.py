@@ -7,7 +7,6 @@ from django.contrib.auth.models import User
 class user_info(models.Model):
   user_name = models.CharField(max_length=20, null=False)
   is_driver = models.BooleanField(default=False, null=False)
-  hashed_pass = models.IntegerField(null=False)
   region = models.CharField(max_length=50, null=False)
   total_socore = models.FloatField(max_length=50)
 
