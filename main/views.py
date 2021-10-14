@@ -48,4 +48,5 @@ def chat(request):
 def top_share(request):
     all_user_info = user_info.objects.all()
     context = {"all_user_info": all_user_info}
+    request.user
     return render(request, "main/top_share.html", context)

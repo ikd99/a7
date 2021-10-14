@@ -1,12 +1,12 @@
 from django.db import models
 from django.db.models.expressions import F
 from django.db.models.fields import IntegerField
+from django.contrib.auth.models import User
 
 # Create your models here.
 class user_info(models.Model):
-  user_name = models.CharField(max_length=20, null=False)
+  user_name = models.OneToOneField(User, on_delete=models.CASCADE)
   is_driver = models.BooleanField(default=False, null=False)
-  hashed_pass = models.IntegerField(null=False)
   region = models.CharField(max_length=50, null=False)
   total_socore = models.FloatField(max_length=50)
 
