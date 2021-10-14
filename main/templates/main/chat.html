@@ -6,18 +6,22 @@
   {{ id }}
   {{ user }}
   <form action="{% url 'main:chat' id %}" method="post">
-    {% csrf_token %}
-    {{ form }}
-    <tr>
-      <td></td>
-      <td><input type="submit" value="送信"></td>
-    </tr>
-
-    {% for chat in comment %}
+    <div class="chat_form">
+      {% csrf_token %}
+      {{ form }}
       <tr>
+        <td></td>
+        <td><input type="submit" value="送信"></td>
+      </tr>
+    </div>
+
+    {% for chat in comment reversed %}
+    <div class="chat_home">
+      <tr id="chat_table">
         <td>{{ chat.user_id }}</td>
         <td>{{ chat.text }}</td>
       </tr>
+    </div>
     {% endfor %}
   </form>
 {% endblock %}

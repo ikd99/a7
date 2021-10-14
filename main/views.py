@@ -2,8 +2,6 @@ from django.http.response import HttpResponseRedirect
 from django.shortcuts import redirect, render
 from .models import requests, user_info, favorite, messages
 from .form import PostAdd, TestForm
-from django.contrib.auth.models import User
-from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
@@ -48,8 +46,7 @@ def getMyPage(request):
 @login_required
 def chat(request, num):
     chat_room = requests.objects.get(id=num)
-    comment = messages.objects.all().filter(post_id=chat_room.id)
-    
+    comment = messages.objects.all().filter(post_id=chat_room.id)  
     my_dict = {
         'form': TestForm,
         'comment': comment,
@@ -61,12 +58,7 @@ def chat(request, num):
     if (request.method == "POST"):
         my_dict['form'] = TestForm(request.POST)
         user = request.user
-        # user = User.objects.get(id=user_id)
-        # messages.user_id = request.user
-        # messages.post_id = chat_room.id
-        # messages.text = request.POST['text']
-        # messages.save()
         post_comment = messages(user_id=user, post_id = chat_room, text=request.POST['text'])
         post_comment.save()
-        return HttpResponseRedirect('chat')
+        return redirect('main:chat',  num=num)
     return render(request, 'main/chat.html', my_dict)
