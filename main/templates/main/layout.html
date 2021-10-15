@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <title>MatchingDjangoApp</title>
     <link rel="stylesheet" href="{% static "css/styles.css" %}" />
-    <script src="{% static 'javascript/sample.js' %}"></script>
+    <script src="{% static 'javascript/main.js' %}"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     {% bootstrap_css %}
     {% bootstrap_javascript %}
@@ -17,9 +17,7 @@
       <header>
         <!-- aタグのhrefは後から調整する -->
         <div class="logo"><a href="">SAMPLE</a></div>
-        <div class="sp-menu">
-          <span class="material-icons" id="icons">menu</span>
-        </div>
+        
         <ul>
           {% if user.is_authenticated %}
             <li><a href="{% url 'logout' %}">ログアウト</a></li>
@@ -28,39 +26,43 @@
             <li><a href="{% url 'signup' %}">会員登録</a></li>
           {% endif %}
         </ul>
+        <span class="material-icons" id="icons">
+          menu
+        </span>
       </header>
       <main>
         <div class="header-main"></div>
         {% block mainblock %}
 
         {% endblock %}
+        <div class="header-main"></div>
       </main>
       <footer>
         <nav class="pc-nav">
           <ul>
             <li>
-              <a href="{% url 'main:chat' %}">
+              <a href="">
                 <span class="material-icons" id="home">
                   home
                 </span>
               </a>
             </li>
             <li>
-              <a href="{% url 'main:chat' %}">
+              <a href="">
                 <span class="material-icons" id="post_add">
                   post_add
                 </span>
               </a>
             </li>
             <li>
-              <a href="{% url 'main:chat' %}">
+              <a href="">
                 <span class="material-icons" id="message">
                   message
                 </span>
               </a>
             </li>
             <li>
-              <a href="{% url 'main:chat' %}">
+              <a href="">
                 <span class="material-icons" id="person">
                   person
                 </span>

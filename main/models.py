@@ -11,7 +11,7 @@ class user_info(models.Model):
   total_socore = models.FloatField(max_length=50)
 
 class requests(models.Model):
-  client_id = models.ForeignKey(user_info, on_delete=models.CASCADE)
+  client_id = models.ForeignKey(User, on_delete=models.CASCADE)
   title = models.CharField(max_length=100, null=False)
   matching_complete = models.BooleanField(default=False)
   request_complete = models.BooleanField(default=False)
@@ -26,7 +26,7 @@ class requests(models.Model):
   client_evaluation = models.FloatField(null=True)
 
 class messages(models.Model):
-  user_id = models.ForeignKey(user_info, on_delete=models.SET_NULL, null=True)
+  user_id = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
   post_id = models.ForeignKey(requests, on_delete=models.CASCADE)
   text = models.TextField(max_length=1000, null=False)
 
