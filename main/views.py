@@ -42,13 +42,7 @@ def post(request):
 
 
 def getMyPage(request):
-    header = ['ユーザー名', 'ドライバーか', '地域']
-    my_dict ={
-        'header': header,
-        'user' : user_info.objects.get(id=1),
-        'favorite': favorite.objects.get(id=1)
-    }
-    return render(request, 'main/mypage.html', my_dict)
+    return render(request, 'main/mypage.html')
 
 @login_required
 def chat(request, num):
@@ -71,3 +65,6 @@ def chat(request, num):
         post_comment.save()
         return redirect('main:chat',  num=num)
     return render(request, 'main/chat.html', my_dict)
+
+def message(request):
+    return render(request, 'main/message.html')
