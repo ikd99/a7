@@ -1,0 +1,23 @@
+{% extends "main/layout.html" %} 
+
+{% block mainblock %}
+  <h1>詳細画面</h1>
+  <a href="{% url 'main:chat' id %}"><button>マッチングしてチャットする</button></a>
+  <table>
+    <tr>
+      {% for col in header %}
+      <th>{{ col }}</th>
+      {% endfor %}
+    </tr>
+    <!-- {% for post in posts %} -->
+    <tr>
+      <td>{{ post.client_id }}</td>
+      <td>{{ post.title }}</td>
+      <td>{{ post.departure_place }}</td>
+      <td>{{ post.destination_place }}</td>
+      <td>{{ post.delivery_date }}</td>
+      <td>{{ post.text }}</td>
+    </tr>
+    <!-- {% endfor %} -->
+  </table>
+{% endblock %}
