@@ -9,7 +9,7 @@
     <th>{{ col }}</th>
     {% endfor %}
   </tr>
-  {% for post in posts%}
+  {% for post in posts reversed %}
   <tr>
     <td>{{ post.client_id }}</td>
     <td>{{ post.title }}</td>

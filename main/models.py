@@ -2,6 +2,7 @@ from django.db import models
 from django.db.models.expressions import F
 from django.db.models.fields import IntegerField
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 # Create your models here.
 class user_info(models.Model):
@@ -16,7 +17,7 @@ class requests(models.Model):
   matching_complete = models.BooleanField(default=False)
   request_complete = models.BooleanField(default=False)
   share_or_not = models.BooleanField(default=False)
-  post_time = models.DateTimeField(null=False)
+  post_time = models.DateTimeField(default=timezone.now)
   text = models.TextField(max_length=1000, null=False)
   departure_place = models.CharField(max_length=100, null=False)
   destination_place = models.CharField(max_length=100, null=False)
