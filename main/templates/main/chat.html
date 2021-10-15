@@ -2,9 +2,7 @@
 
 {% block mainblock %}
   <h1>チャット画面</h1>
-  {{ user }}
-  {{ id }}
-  {{ user }}
+  <!-- {{ user }} -->
   <form action="{% url 'main:chat' id %}" method="post">
     <div class="chat_form">
       {% csrf_token %}
@@ -15,14 +13,20 @@
       </tr>
     </div>
 
-    {% for chat in comment reversed %}
-    <div class="chat_home">
-      <tr id="chat_table">
-        <td>{{ chat.user_id }}</td>
-        <td>{{ chat.text }}</td>
+    <table>
+      <tr>
+        <th>ユーザー</th>
+        <th>内容</th>
       </tr>
-    </div>
-    {% endfor %}
+      {% for chat in comment reversed %}
+      <div class="chat_home">
+        <tr id="chat_table">
+          <td>{{ chat.user_id }}</td>
+          <td>{{ chat.text }}</td>
+        </tr>
+      </div>
+      {% endfor %}
+    </table>
   </form>
 {% endblock %}
  
