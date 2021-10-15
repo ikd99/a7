@@ -3,18 +3,20 @@
 {% block mainblock %}
 
 <h1>mypage</h1>
-<tr>
-  {% for col in header %}
-  <th>{{ col }}</th>
-  {% endfor %}
-</tr>
-<table>
+<!---->>
   <tr>
-    <td>{{ user.user_name }}</td>
-    <td>{{ user.is_driver }}</td>
-    <td>{{ user.region }}</td>
-    <td>{{ user.total_score }}</td>
+    {% for col in header %}
+    <th>{{ col }}</th>
+    {% endfor %}
   </tr>
-</table>
+  <table>
+    <tr>
+      <td>{{ user.user_name }}</td>
+      <td>{{ user.is_driver }}</td>
+      <td>{{ user.region }}</td>
+      <td>{{ user.total_score }}</td>
+    </tr>
+  </table>
+––>
 
 {% endblock %}

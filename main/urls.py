@@ -5,7 +5,8 @@ app_name='main'
 urlpatterns = [
   path('', views.index, name='index'),
   path('post/', views.post, name='post'),
-  path('mypage/', views.getMyPage, name='mypage'),
-  path('top_share/', views.top_share, name='top_share'),
+  path('mypage/', views.mypage, name='mypage'),
+  path('profile/', views.profile, name='profile'),
   path('chat/<int:num>', views.chat, name='chat'),
+  path('user_edit/', views.user_edit, name='user_edit')
 ]

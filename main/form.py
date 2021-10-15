@@ -1,4 +1,5 @@
-from .models import requests
+from django.db.models import fields
+from .models import requests, user_info
 from django import forms
 ...
 
@@ -17,3 +18,9 @@ class PostAdd(forms.ModelForm):
 
 class TestForm(forms.Form):
     text = forms.CharField(label='文字入力')
+
+
+class UserForm(forms.ModelForm):
+    class Meta:
+        model = user_info
+        fields = ('is_driver', 'region')

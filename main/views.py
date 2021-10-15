@@ -1,6 +1,7 @@
-from django.http.response import HttpResponseRedirect
+# from typing_extensions import Required
+from django.http.response import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render
-from .models import requests, user_info, favorite, messages
+from .models import requests, user_info, messages
 from .form import PostAdd, TestForm
 from django.contrib.auth.decorators import login_required
 
@@ -34,20 +35,21 @@ def post(request):
     }
     return render(request, 'main/post.html', modelform_dict)
 
-def getMyPage(request):
-    header = ['ユーザー名', 'ドライバーか', '地域']
-    my_dict ={
-        'header': header,
-        'user' : user_info.objects.get(id=1),
-        'favorite': favorite.objects.get(id=1)
-    }
-    return render(request, 'main/mypage.html', my_dict)
+def mypage(request):
+    # header = ['ユーザー名', 'ドライバーか', '地域']
+    # my_dict ={
+    #    'header': header,
+    #    'user' : user_info.objects.get(id=1),
+    #    # 'favorite': favorite.objects.get(id=1)
+    #}
+    # return render(request, 'main/mypage.html', my_dict)
+    return render(request, "main/mypage.html")
 
-def top_share(request):
+def profile(request):
     all_user_info = user_info.objects.all()
     context = {"all_user_info": all_user_info}
     request.user
-    return render(request, "main/top_share.html", context)
+    return render(request, "main/profile.html", context)
     
 @login_required
 def chat(request, num):
@@ -68,3 +70,6 @@ def chat(request, num):
         post_comment.save()
         return redirect('main:chat',  num=num)
     return render(request, 'main/chat.html', my_dict)
+
+def user_edit(request):
+    return render(request, 'main/user_edit.html')

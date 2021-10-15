@@ -1,18 +1,19 @@
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>テスト</title>
-</head>
-<body>
+{% extends "main/layout.html" %} 
+
+{% block mainblock %}
     <h1>Modelテスト</h1>
     <h2>User_info一覧</h2>
     {% if all_user_info %}
+    <p>
+            <a href="{% url 'main:user_edit' %}">
+                プロフィール編集
+            </a>
+        </p>
     <table class="table">
         <thead>
             <tr>
                 <th>user_name</th>
                 <th>is_driver</th>
-                <th>hashed_pass</th>
                 <th>region</th>
                 <th>total_socore</th>
             </tr>
@@ -22,7 +23,6 @@
                 <tr>
                     <th>{{i.user_name}}</th>
                     <th>{{i.is_driver}}</th>
-                    <th>{{i.hashed_pass}}</th>
                     <th>{{i.region}}</th>
                     <th>{{i.total_socore}}</th>
                 </tr>
@@ -30,8 +30,10 @@
         </tbody>
     </table>
     {% else %}
-        <p>User_infoは空だヨ</p>
+        <p>
+            <a href="{% url 'main:user_edit' %}">
+                User_infoは空だヨ
+            </a>
+        </p>
     {% endif %}
-    
-</body>
-</html>
+{% endblock %}
