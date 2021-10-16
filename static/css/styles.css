@@ -127,7 +127,11 @@ nav {
 }
 
 .content {
-  background-color: white;
+  /* background-color: white; */
   width: 500px;
   height: 70%;
+}
+
+.modal-body {
+  color: #d3d3d3;
 }
