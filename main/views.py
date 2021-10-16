@@ -61,9 +61,10 @@ def chat(request, num):
         return redirect('main:chat',  num=num)
     return render(request, 'main/chat.html', my_dict)
 
+@login_required
 def history(request):
-    user = request.user.id
-    posts = requests.objects.all().filter(id=user)
+    user = request.user
+    posts = requests.objects.all().filter(client_id=user, matching_complete=True)
     header = ['ユーザー','タイトル','目的地','出発地','配達日時','詳細']
     my_dict = {
         'posts': posts,
@@ -71,20 +72,22 @@ def history(request):
     }
     return render(request, 'main/history.html', my_dict)
 
+@login_required
 def favorites(request):
-    user = request.user.id
+    user = request.user
+    posts = requests.objects.all().filter(client_id=user, matching_complete=True)
     header = ['ユーザー','タイトル','目的地','出発地','配達日時','詳細']
-    posts = requests.objects.all().filter(id=user)
     my_dict = {
         'posts': posts,
         'header': header,
     }
     return render(request, 'main/favorites.html', my_dict)
 
+@login_required
 def match_complete(request):
-    user = request.user.id
+    user = request.user
     header = ['ユーザー','タイトル','目的地','出発地','配達日時','詳細']
-    posts = requests.objects.all().filter(id=user)
+    posts = requests.objects.all().filter(client_id=user, request_complete=True)
     my_dict = {
         'posts': posts,
         'header': header,
@@ -108,3 +111,21 @@ def detail(request, num):
         match.save()
         return redirect('main:chat',  num=num)
     return render(request, 'main/detail.html', my_dict)
+
+@login_required
+def request_complete(request, num):
+    posts = requests.objects.all().filter(id=num)
+    print(num)
+    header = ['ユーザー','タイトル','目的地','出発地','配達日時','詳細']
+    my_dict = {
+        'id': num,
+        'posts': posts,
+        'header': header,
+        'form': StatusForm,
+    }
+    if (request.method == "POST"):
+        match = requests.objects.get(id=num)
+        match.request_complete = True
+        match.save()
+        return redirect('main:match_complete')
+    return render(request, 'main/request_complete.html', my_dict)
