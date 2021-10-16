@@ -8,5 +8,4 @@ urlpatterns = [
   path('mypage/', views.mypage, name='mypage'),
   path('profile/', views.profile, name='profile'),
   path('chat/<int:num>', views.chat, name='chat'),
-  path('user_edit/', views.user_edit, name='user_edit')
 ]

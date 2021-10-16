@@ -45,12 +45,16 @@ def mypage(request):
     # return render(request, 'main/mypage.html', my_dict)
     return render(request, "main/mypage.html")
 
+@login_required
 def profile(request):
-    all_user_info = user_info.objects.all()
-    context = {"all_user_info": all_user_info}
-    request.user
+    user = request.user
+    print(user)
+    all_user = user_info.objects.all().filter(user_name=user)
+    context = {"all_user_info": all_user}
+    print(all_user)
+    print(context)
     return render(request, "main/profile.html", context)
-    
+
 @login_required
 def chat(request, num):
     chat_room = requests.objects.get(id=num)
@@ -71,5 +75,3 @@ def chat(request, num):
         return redirect('main:chat',  num=num)
     return render(request, 'main/chat.html', my_dict)
 
-def user_edit(request):
-    return render(request, 'main/user_edit.html')
