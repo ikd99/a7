@@ -1,0 +1,11 @@
+{% extends "main/layout.html" %} 
+
+{% block mainblock %}
+<h1>取引を完了する</h1>
+<form action="{% url 'main:request_complete' id %}" method="post">
+  <p>この案件とのマッチングを終了する場合は、チェックを入れてください</p>
+  {% csrf_token %}
+  {{ form }}
+  <input type="submit" value="マッチング終了">
+</form>
+{% endblock %}

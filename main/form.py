@@ -33,3 +33,17 @@ class UserForm(forms.Form):
     region = forms.CharField(label='地域', required=True)
     # total_socore = forms.FloatField(label='総合評価')
 
+    text = forms.CharField(label='コメント')
+
+# class StatusForm(forms.Form):
+#     status = forms.BooleanField(label='マッチングする', required=False)
+
+def wrap_boolean_check(v):
+    return not (v is False or v is None or v == '' or v == 0)
+
+
+class StatusForm(forms.Form):
+    check = forms.BooleanField(
+        initial=1,
+        widget=forms.CheckboxInput(check_test=wrap_boolean_check)
+    )

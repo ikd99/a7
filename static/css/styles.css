@@ -10,16 +10,16 @@ body {
 header {
   width: 100%;
   background: #d3d3d3;
-  display: flex; 
-  align-items: center; 
-  justify-content: space-between; 
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   padding-left: 30px;
   padding-right: 30px;
   position: fixed;
-  top: 0px;                  
-  left: 0px;                
-  width: 100%;             
-  height: 200px;   
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 200px;
   box-sizing: border-box;
 }
 
@@ -51,16 +51,16 @@ header {
 
 footer {
   background: #d3d3d3;
-  display: flex; 
-  align-items: center; 
-  justify-content: space-between; 
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   padding-left: 30px;
   padding-right: 30px;
-  position: fixed;           
-  bottom: 0px;               
-  left: 0px;                 
-  width: 100%;              
-  height: 200px;            
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  height: 200px;
   box-sizing: border-box;
 }
 
@@ -101,11 +101,84 @@ nav {
 }
 /* ヘッダーとフッターのcss */
 
-/* チャットのcss */
-.chat_home {
+
+/* index.htmlのcssここから */
+
+/*アコーディオン全体*/
+.accordion-area{
+  list-style: none;
+  width: 96%;
+  max-width: 900px;
+  height: 100%;
+  margin:0 auto;
   display: flex;
+  flex-direction: column;
 }
 
-#chat_table {
+.accordion-area li{
+  margin: 10px 0;
 }
+
+.accordion-area section {
+  border: 1px solid #ccc;
+}
+
+.accordion-area span {
+  margin-right: 20px;
+  font-size: 1.25rem;
+}
+
+/*アコーディオンタイトル*/
+.title {
+  position: relative;/*+マークの位置基準とするためrelative指定*/
+  cursor: pointer;
+  font-size:2.25rem;
+  font-weight: normal;
+  padding: 3% 3% 3% 50px;
+  transition: all .5s ease;
+}
+
+/*アイコンの＋と×*/
+.title::before,
+.title::after{
+  position: absolute;
+  content:'';
+  width: 15px;
+  height: 2px;
+  background-color: #333;
+
+}
+.title::before{
+  top:48%;
+  left: 15px;
+  transform: rotate(0deg);
+
+}
+.title::after{
+  top:48%;
+  left: 15px;
+  transform: rotate(90deg);
+
+}
+/*　closeというクラスがついたら形状変化　*/
+.title.close::before{
+transform: rotate(45deg);
+}
+
+.title.close::after{
+transform: rotate(-45deg);
+}
+
+/*アコーディオンで現れるエリア*/
+.box {
+  display: none;/*はじめは非表示*/
+  background: #f3f3f3;
+  margin:0 3% 3% 3%;
+  padding: 3%;
+}
+
+/* index.htmlのcssここまで */
+
+
+/* チャットのcss */
 /* チャットのcss */
