@@ -8,5 +8,7 @@ urlpatterns = [
   path('mypage/', views.getMyPage, name='mypage'),
   path('chat/<int:num>', views.chat, name='chat'),
   path('detail/<int:num>', views.detail, name='detail'),
-  path('message', views.message, name='message'),
+  path('history/', views.history, name='history'),
+  path('favorites/', views.favorites, name='favorites'),
+  path('match_complete/', views.match_complete, name='match_complete'),
 ]

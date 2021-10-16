@@ -1,12 +1,14 @@
+from django.db.models.base import ModelStateFieldsCacheDescriptor
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import redirect, render
 from .models import requests, user_info, favorite, messages
-from .form import PostAdd, TestForm, PostForm
+from .form import TestForm, PostForm, StatusForm
 from django.contrib.auth.decorators import login_required
 
-# Create your views here.
+# Create your views here.F
 def index(request):
     posts = requests.objects.all()
+    # posts = requests.objects.get(complete=False)
     header = ['ユーザー','タイトル','目的地','出発地','配達日時','詳細']
     my_dict2 = {
         'posts': posts,
@@ -37,7 +39,6 @@ def post(request):
         return redirect('main:post')
     return render(request, 'main/post.html', my_dict)
 
-
 def getMyPage(request):
     return render(request, 'main/mypage.html')
 
@@ -52,26 +53,58 @@ def chat(request, num):
         'id': chat_room.id,
         'header': header,
     }
-    print(chat_room.id)
-    print(num)
-    print(request.user)
     if (request.method == "POST"):
         my_dict['form'] = TestForm(request.POST)
         user = request.user
-        post_comment = messages(user_id=user, post_id = chat_room, text=request.POST['text'])
+        post_comment = messages(user_id=user, post_id = chat_room, text=request.POST.get('text', False))
         post_comment.save()
         return redirect('main:chat',  num=num)
     return render(request, 'main/chat.html', my_dict)
 
-def message(request):
-    return render(request, 'main/message.html')
+def history(request):
+    user = request.user.id
+    posts = requests.objects.all().filter(id=user)
+    header = ['ユーザー','タイトル','目的地','出発地','配達日時','詳細']
+    my_dict = {
+        'posts': posts,
+        'header': header,
+    }
+    return render(request, 'main/history.html', my_dict)
 
+def favorites(request):
+    user = request.user.id
+    header = ['ユーザー','タイトル','目的地','出発地','配達日時','詳細']
+    posts = requests.objects.all().filter(id=user)
+    my_dict = {
+        'posts': posts,
+        'header': header,
+    }
+    return render(request, 'main/favorites.html', my_dict)
+
+def match_complete(request):
+    user = request.user.id
+    header = ['ユーザー','タイトル','目的地','出発地','配達日時','詳細']
+    posts = requests.objects.all().filter(id=user)
+    my_dict = {
+        'posts': posts,
+        'header': header,
+    }
+    return render(request, 'main/match_complete.html', my_dict)
+
+@login_required
 def detail(request, num):
     posts = requests.objects.all().filter(id=num)
+    print(num)
     header = ['ユーザー','タイトル','目的地','出発地','配達日時','詳細']
     my_dict = {
         'id': num,
         'posts': posts,
         'header': header,
+        'form': StatusForm,
     }
+    if (request.method == "POST"):
+        match = requests.objects.get(id=num)
+        match.matching_complete = True
+        match.save()
+        return redirect('main:chat',  num=num)
     return render(request, 'main/detail.html', my_dict)

@@ -9,7 +9,7 @@
     <th>{{ col }}</th>
     {% endfor %}
   </tr>
-  {% for post in posts %}
+  {% for post in posts reversed %}
   <tr>
     <td>{{ post.client_id }}</td>
     <td>{{ post.title }}</td>
@@ -17,7 +17,6 @@
     <td>{{ post.destination_place }}</td>
     <td>{{ post.delivery_date }}</td>
     <td>{{ post.text }}</td>
-    <!-- <td><a href="{% url 'main:chat' post.id %}">チャットする</a></td> -->
     <td><a href="{% url 'main:detail' post.id %}">詳細画面</a></td>
   </tr>
   {% endfor %}
