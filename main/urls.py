@@ -8,4 +8,5 @@ urlpatterns = [
   path('mypage/', views.getMyPage, name='mypage'),
   path('chat/<int:num>', views.chat, name='chat'),
   path('message', views.message, name='message'),
+  path("payment/", views.payment, name = "payment")
 ]

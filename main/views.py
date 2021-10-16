@@ -1,7 +1,7 @@
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import redirect, render
 from .models import requests, user_info, favorite, messages
-from .form import PostAdd, TestForm, PostForm
+from .form import  TestForm, PostForm
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
@@ -40,7 +40,7 @@ def post(request):
         return redirect('main:post')
     return render(request, 'main/post.html', my_dict)
 
-
+@login_required
 def getMyPage(request):
     return render(request, 'main/mypage.html')
 
@@ -68,3 +68,7 @@ def chat(request, num):
 
 def message(request):
     return render(request, 'main/message.html')
+
+@login_required
+def payment(request):
+    return render(request, "main/payment.html")
