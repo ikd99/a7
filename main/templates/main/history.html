@@ -11,6 +11,9 @@
   <a href="{% url 'main:favorites' %}">
     <button>お気に入り</button>
   </a>
+  <a href="{% url 'main:done_post' %}">
+    <button>投稿履歴</button>
+  </a>
   <h3>取引中</h3>
   <table>
     <tr>
@@ -26,7 +29,7 @@
       <td>{{ post.destination_place }}</td>
       <td>{{ post.delivery_date }}</td>
       <td>{{ post.text }}</td>
-      <td><a href="{% url 'main:detail' post.id %}">詳細画面</a></td>
+      <td><a href="{% url 'main:chat' post.id %}">チャットルーム</a></td>
     </tr>
     {% endfor %}
   </table>

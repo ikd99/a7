@@ -84,6 +84,17 @@ def favorites(request):
     return render(request, 'main/favorites.html', my_dict)
 
 @login_required
+def done_post(request):
+    user = request.user
+    posts = requests.objects.all().filter(client_id=user)
+    header = ['ユーザー','タイトル','目的地','出発地','配達日時','詳細']
+    my_dict = {
+        'posts': posts,
+        'header': header,
+    }
+    return render(request, 'main/done_post.html', my_dict)
+
+@login_required
 def match_complete(request):
     user = request.user
     header = ['ユーザー','タイトル','目的地','出発地','配達日時','詳細']

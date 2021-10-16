@@ -14,7 +14,7 @@
   <a href="{% url 'main:done_post' %}">
     <button>投稿履歴</button>
   </a>
-  <h3>お気に入り</h3>
+  <h3>投稿履歴</h3>
   <table>
     <tr>
       {% for col in header %}
@@ -29,7 +29,6 @@
       <td>{{ post.destination_place }}</td>
       <td>{{ post.delivery_date }}</td>
       <td>{{ post.text }}</td>
-      <td><a href="{% url 'main:detail' post.id %}">詳細画面</a></td>
     </tr>
     {% endfor %}
   </table>

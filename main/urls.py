@@ -10,6 +10,7 @@ urlpatterns = [
   path('detail/<int:num>', views.detail, name='detail'),
   path('request_complete/<int:num>', views.request_complete, name='request_complete'),
   path('history/', views.history, name='history'),
+  path('done_post/', views.done_post, name='done_post'),
   path('favorites/', views.favorites, name='favorites'),
   path('match_complete/', views.match_complete, name='match_complete'),
 ]
