@@ -181,10 +181,4 @@ transform: rotate(-45deg);
 
 
 /* チャットのcss */
-.chat_home {
-  display: flex;
-}
-
-#chat_table {
-}
 /* チャットのcss */
