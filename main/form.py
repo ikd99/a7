@@ -16,11 +16,20 @@ class PostAdd(forms.ModelForm):
             'text':"詳細"
         }
 
+class PostForm(forms.Form):
+    title = forms.CharField(label='タイトル')
+    text = forms.CharField(label='詳細', widget=forms.Textarea)
+    departure_place = forms.CharField(label='出発地')
+    destination_place  = forms.CharField(label='目的地')
+    delivery_date = forms.DateField(label='配達希望日')
+    asking_price = forms.IntegerField(label='希望価格（日）')
+    
 class TestForm(forms.Form):
     text = forms.CharField(label='文字入力')
 
 
-class UserForm(forms.ModelForm):
-    class Meta:
-        model = user_info
-        fields = ('is_driver', 'region')
+class UserForm(forms.Form):
+    is_driver = forms.BooleanField(label='ドライバー登録', required=True)
+    region = forms.CharField(label='地域', required=True)
+    # total_socore = forms.FloatField(label='総合評価')
+

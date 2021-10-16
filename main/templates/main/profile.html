@@ -38,12 +38,13 @@
                 </tr>
             </thead>
             <tbody>
-                <form action="" method="post">
+                <form action="{% url 'main:profile' %}" method="post">
                     {% csrf_token %}
+                    {{ form.as_table }}
                     <tr>
-                        <th>{{user}}</th>
-                        <th><input type="checkbox" value="" name="is_driver"></th>
-                        <th><input type="text" value="" name="region"></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
                         <th><button type="submit" name="saving">保存</button></th>
                     </tr>
                 </form>

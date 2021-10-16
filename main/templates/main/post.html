@@ -1,24 +1,15 @@
-<!DOCTYPE html>
-{% load static %}
-<html lang="ja">
-  <head>
-    <meta charset="utf-8" />
-    <title>{{ title }}</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
-  </head>
+{% extends "main/layout.html" %} 
 
-  <body>
-    <h1>{{ title }}</h1>
-    <p>{{ message }}</p>
-    <table>
-      <form action="../../views.py" method="post">
-        {% csrf_token %} 
-        {{ form.as_table }}
-        <tr>
-          <td></td>
-          <td><input type="submit" value="投稿する" /></td>
-        </tr>
-      </form>
-    </table>
-  </body>
-</html>
+{% block mainblock %}
+  <h1>案件投稿画面</h1>
+  <table>
+    <form action="{% url 'main:post' %}" method="post">
+      {% csrf_token %} 
+      {{ form.as_table }}
+      <tr>
+        <td></td>
+        <td><input type="submit" value="投稿する" /></td>
+      </tr>
+    </form>
+  </table>
+{% endblock %}
