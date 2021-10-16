@@ -1,5 +1,6 @@
 {% load static %}
 {% load django_bootstrap5 %}
+
 <!doctype html>
 <html lang="ja">
 
@@ -7,7 +8,6 @@
     <meta charset="utf-8">
     <title>MatchingDjangoApp</title>
     <link rel="stylesheet" href="{% static "css/styles.css" %}" />
-    <script src="{% static 'javascript/main.js' %}"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     {% bootstrap_css %}
     {% bootstrap_javascript %}
@@ -17,26 +17,24 @@
       <header>
         <!-- aタグのhrefは後から調整する -->
         <div class="logo"><a href="">SAMPLE</a></div>
-        
+
         <ul>
           {% if user.is_authenticated %}
-            <li><a href="{% url 'logout' %}">ログアウト</a></li>
+            <li><a href="">share</a></li>
           {% else %}
             <li><a href="{% url 'login' %}">ログイン</a></li>
             <li><a href="{% url 'signup' %}">会員登録</a></li>
           {% endif %}
         </ul>
-        <span class="material-icons" id="icons">
-          menu
-        </span>
       </header>
+
       <main>
         <div class="header-main"></div>
         {% block mainblock %}
-
         {% endblock %}
         <div class="header-main"></div>
       </main>
+
       <footer>
         <nav class="pc-nav">
           <ul>
@@ -69,7 +67,10 @@
               </a>
             </li>
           </ul>
-       </nav>
+        </nav>
       </footer>
+
+      <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="{% static 'css/javascript/main.js' %}"></script>
     </body>
 </html>

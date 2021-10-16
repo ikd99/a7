@@ -1,9 +1,70 @@
-{% extends "main/layout.html" %} 
+{% extends "main/layout.html" %}
 
 {% block mainblock %}
 
 <h1>依頼一覧</h1>
-<table>
+
+{% comment %} <ul class="accordion-area">
+
+<li>
+<section>
+<h3 class="title">タイトル</h3>
+<div class="box">
+<p>内容が入ります。</p>
+</div>
+</section>
+</li>
+
+</ul>
+<ul class="accordion-area">
+
+<li>
+<section>
+<h3 class="title">タイトル</h3>
+<div class="box">
+<p>内容が入ります。</p>
+</div>
+</section>
+</li>
+
+</ul>
+<ul class="accordion-area">
+
+<li>
+<section>
+<h3 class="title">タイトル</h3>
+<div class="box">
+<p>内容が入ります。</p>
+</div>
+</section>
+</li>
+
+</ul> {% endcomment %}
+
+
+<ul class="accordion-area">
+{% for post in posts reversed %}
+
+    <li>
+      <section>
+        <span>ユーザー名: {{ post.client_id }}</span>
+        <span>出発地: {{ post.departure_place }}</span>
+        <span>目的地: {{ post.destination_place }}</span>
+        <span>配達希望日: {{ post.delivery_date }}</span>
+        <h3 class="title">{{ post.title }}</h3>
+        <div class="box">
+          <p>{{ post.text }}</p>
+          <span><a href="{% url 'main:chat' post.id %}">チャットする</a><span/>
+        </div>
+      </section>
+    </li>
+
+{% endfor %}
+<ul>
+
+
+
+{% comment %} <table>
   <tr>
     {% for col in header %}
     <th>{{ col }}</th>
@@ -20,6 +81,6 @@
     <td><a href="{% url 'main:chat' post.id %}">チャットする</a></td>
   </tr>
   {% endfor %}
-</table>
+</table> {% endcomment %}
 
 {% endblock %}
