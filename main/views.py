@@ -27,8 +27,8 @@ def post(request):
         my_dict['form'] = PostForm(request.POST)
         user = request.user
         post = requests(
-            client_id=user, 
-            title=request.POST.get('title'), 
+            client_id=user,
+            title=request.POST.get('title'),
             text=request.POST.get('text'),
             departure_place=request.POST.get('departure_place'),
             destination_place=request.POST.get('destination_place'),
@@ -45,7 +45,7 @@ def getMyPage(request):
 @login_required
 def chat(request, num):
     chat_room = requests.objects.get(id=num)
-    comment = messages.objects.all().filter(post_id=chat_room.id)  
+    comment = messages.objects.all().filter(post_id=chat_room.id)
     header = ['ユーザー','内容']
     my_dict = {
         'form': TestForm,
