@@ -1,76 +1,76 @@
-{% load static %} {% load django_bootstrap5 %}
-<!DOCTYPE html>
+{% load static %}
+{% load django_bootstrap5 %}
+
+<!doctype html>
 <html lang="ja">
   <head>
     <meta charset="utf-8" />
     <title>MatchingDjangoApp</title>
     <link rel="stylesheet" href="{% static "css/styles.css" %}" />
-    <!-- <script src="{% static 'javascript/main.js' %}"></script> -->
-
-    <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet"
-    />
-    {% bootstrap_css %} {% bootstrap_javascript %}
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
   </head>
 
-  <body>
-    <header>
-      <!-- aタグのhrefは後から調整する -->
-      <div class="logo"><a href="">SAMPLE</a></div>
+    <body>
+      <header>
+        <!-- aタグのhrefは後から調整する -->
+        <div class="logo"><a href="">SAMPLE</a></div>
 
-      <ul>
-        {% if user.is_authenticated %}
-        <li><a href="{% url 'logout' %}">ログアウト</a></li>
-        {% else %}
-        <li><a href="{% url 'login' %}">ログイン</a></li>
-        <li><a href="{% url 'signup' %}">会員登録</a></li>
-        {% endif %}
-      </ul>
-      <span class="material-icons" id="icons"> menu </span>
-    </header>
-    <main>
-      <div class="header-main"></div>
-      {% block mainblock %} {% endblock %}
-      <div class="header-main"></div>
-    </main>
-    <footer>
-      <nav class="pc-nav">
         <ul>
-          <li>
-            <a href="{% url 'main:index' %}">
-              <span class="material-icons" id="home"> home </span>
-            </a>
-          </li>
-          <li>
-            <a href="{% url 'main:post' %}">
-              <span class="material-icons" id="post_add"> post_add </span>
-            </a>
-          </li>
-          <li>
-            <a href="{% url 'main:message' %}">
-              <span class="material-icons" id="message"> message </span>
-            </a>
-          </li>
-          <li>
-            <a href="{% url 'main:mypage' %}">
-              <span class="material-icons" id="person"> person </span>
-            </a>
-          </li>
+          {% if user.is_authenticated %}
+            <li><a href="">share</a></li>
+            <li><a href="{% url 'logout' %}">ログアウト</a></li>
+          {% else %}
+            <li><a href="{% url 'login' %}">ログイン</a></li>
+            <li><a href="{% url 'signup' %}">会員登録</a></li>
+          {% endif %}
         </ul>
-      </nav>
-    </footer>
-    <script>
-      const btn = document.getElementById("btn");
-      const modal = document.getElementById("payment_modal");
+      </header>
 
-      btn ? console.log(btn) : console.log("nothing");
-      modal ? console.log(modal) : console.log("no modal");
+      <main>
+        <div class="header-main"></div>
+        {% block mainblock %}
+        {% endblock %}
+        <div class="header-main"></div>
+      </main>
 
-      btn.addEventListener("click", () => {
-        console.log("click!!");
-        modal.style.display = "flex";
-      });
-    </script>
-  </body>
+      <footer>
+        <nav class="pc-nav">
+          <ul>
+            <li>
+              <a href="{% url 'main:index' %}">
+                <span class="material-icons" id="home">
+                  home
+                </span>
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'main:post' %}">
+                <span class="material-icons" id="post_add">
+                  post_add
+                </span>
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'main:history' %}">
+                <span class="material-icons" id="message">
+                  history
+                </span>
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'main:mypage' %}">
+                <span class="material-icons" id="person">
+                  person
+                </span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </footer>
+
+      <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="{% static 'javascript/main.js' %}"></script>
+    </body>
 </html>

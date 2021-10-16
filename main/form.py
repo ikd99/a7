@@ -11,4 +11,17 @@ class PostForm(forms.Form):
     asking_price = forms.IntegerField(label='希望価格（日）')
     
 class TestForm(forms.Form):
-    text = forms.CharField(label='文字入力')
+    text = forms.CharField(label='コメント')
+
+# class StatusForm(forms.Form):
+#     status = forms.BooleanField(label='マッチングする', required=False)
+
+def wrap_boolean_check(v):
+    return not (v is False or v is None or v == '' or v == 0)
+
+
+class StatusForm(forms.Form):
+    check = forms.BooleanField(
+        initial=1,
+        widget=forms.CheckboxInput(check_test=wrap_boolean_check)
+    )
