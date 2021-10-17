@@ -21,7 +21,7 @@ def wrap_boolean_check(v):
 
 
 class StatusForm(forms.Form):
-    check = forms.BooleanField(
+    確認しました = forms.BooleanField(
         initial=1,
         widget=forms.CheckboxInput(check_test=wrap_boolean_check)
     )

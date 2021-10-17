@@ -1,12 +1,15 @@
 {% extends "main/layout.html" %} {% block mainblock %}
 <h1>チャット画面</h1>
 <!-- {{ user }} -->
+{% if status.payment == True %}
 <a href="{% url 'main:request_complete' id %}">
   <button>取引を完了する</button>
 </a>
-<a href="/payment">
-  <button>決済を完了する</button>
+{% else %}
+<a href="{% url 'main:payment' id %}">
+  <button>決済をする</button>
 </a>
+{% endif %}
 <form action="{% url 'main:chat' id %}" method="post">
   <div class="chat_form">
     {% csrf_token %} {{ form }}

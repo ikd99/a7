@@ -52,6 +52,7 @@ def chat(request, num):
         'comment': comment,
         'id': chat_room.id,
         'header': header,
+        'status': chat_room,
     }
     if (request.method == "POST"):
         my_dict['form'] = TestForm(request.POST)
@@ -65,13 +66,25 @@ def message(request):
     return render(request, 'main/message.html')
 
 @login_required
-def payment(request):
-    return render(request, "main/payment.html")
+def payment(request, num):
+    chat_room = requests.objects.get(id=num)
+    my_dict = {
+        'id': chat_room.id,
+        'price': chat_room,
+        'form': StatusForm,
+    }
+    if (request.method == "POST"):
+        paystatus = requests.objects.get(id=num)
+        paystatus.payment = True
+        paystatus.save()
+        print(paystatus.payment)
+        return redirect('main:chat',  num=num)
+    return render(request, "main/payment.html", my_dict)
 
 @login_required
 def history(request):
     user = request.user
-    posts = requests.objects.all().filter(client_id=user, matching_complete=True, request_complete=False)
+    posts = requests.objects.all().filter(client_id=user, request_complete=False, matching_complete=True)
     header = ['ユーザー','タイトル','目的地','出発地','配達日時','詳細']
     my_dict = {
         'posts': posts,

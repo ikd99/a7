@@ -16,6 +16,7 @@ class requests(models.Model):
   title = models.CharField(max_length=100, null=False)
   matching_complete = models.BooleanField(default=False)
   request_complete = models.BooleanField(default=False)
+  payment = models.BooleanField(default=False)
   share_or_not = models.BooleanField(default=False)
   post_time = models.DateTimeField(default=timezone.now)
   text = models.TextField(max_length=1000, null=False)
@@ -31,9 +32,9 @@ class messages(models.Model):
   post_id = models.ForeignKey(requests, on_delete=models.CASCADE)
   text = models.TextField(max_length=1000, null=False)
 
-class payment(models.Model):
-  post_id = models.ForeignKey(requests, on_delete=models.PROTECT)
-  payment_amount = models.IntegerField(null=False)
+# class payment(models.Model):
+#   post_id = models.ForeignKey(requests, on_delete=models.PROTECT)
+#   payment_amount = models.IntegerField(null=False)
 
 class favorite(models.Model):
   user_id = models.ForeignKey(user_info, on_delete=models.CASCADE)
