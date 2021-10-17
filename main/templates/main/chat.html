@@ -1,34 +1,34 @@
-{% extends "main/layout.html" %} 
+{% extends "main/layout.html" %} {% block mainblock %}
+<h1>チャット画面</h1>
+<!-- {{ user }} -->
+<a href="{% url 'main:request_complete' id %}">
+  <button>取引を完了する</button>
+</a>
+<a href="/payment">
+  <button>決済を完了する</button>
+</a>
+<form action="{% url 'main:chat' id %}" method="post">
+  <div class="chat_form">
+    {% csrf_token %} {{ form }}
+    <tr>
+      <td></td>
+      <td><input type="submit" value="送信" /></td>
+    </tr>
+  </div>
 
-{% block mainblock %}
-  <h1>チャット画面</h1>
-  <!-- {{ user }} -->
-  <a href="{% url 'main:request_complete' id %}">
-    <button>決済画面に進む</button>
-  </a>
-  <form action="{% url 'main:chat' id %}" method="post">
-    <div class="chat_form">
-      {% csrf_token %}
-      {{ form }}
-      <tr>
-        <td></td>
-        <td><input type="submit" value="送信"></td>
+  <table>
+    <tr>
+      <th>ユーザー</th>
+      <th>内容</th>
+    </tr>
+    {% for chat in comment reversed %}
+    <div class="chat_home">
+      <tr id="chat_table">
+        <td>{{ chat.user_id }}</td>
+        <td>{{ chat.text }}</td>
       </tr>
     </div>
-
-    <table>
-      <tr>
-        <th>ユーザー</th>
-        <th>内容</th>
-      </tr>
-      {% for chat in comment reversed %}
-      <div class="chat_home">
-        <tr id="chat_table">
-          <td>{{ chat.user_id }}</td>
-          <td>{{ chat.text }}</td>
-        </tr>
-      </div>
-      {% endfor %}
-    </table>
-  </form>
+    {% endfor %}
+  </table>
+</form>
 {% endblock %}
