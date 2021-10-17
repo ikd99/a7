@@ -159,5 +159,9 @@ def request_complete(request, num):
         match = requests.objects.get(id=num)
         match.request_complete = True
         match.save()
-        return redirect('main:match_complete')
+        return redirect('main:evaluation', num=num)
     return render(request, 'main/request_complete.html', my_dict)
+
+@login_required
+def evaluation(request, num):
+    return render(request, 'main/evaluation.html')
