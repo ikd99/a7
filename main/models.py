@@ -18,7 +18,7 @@ class requests(models.Model):
   request_complete = models.BooleanField(default=False)
   payment = models.BooleanField(default=False)
   share_or_not = models.BooleanField(default=False)
-  post_time = models.DateTimeField(default=timezone.now)
+  post_time = models.DateTimeField(auto_now_add=True)
   text = models.TextField(max_length=1000, null=False)
   departure_place = models.CharField(max_length=100, null=False)
   destination_place = models.CharField(max_length=100, null=False)
@@ -26,6 +26,7 @@ class requests(models.Model):
   asking_price = models.IntegerField(null=False)
   driver_evaluation = models.FloatField(null=True)
   client_evaluation = models.FloatField(null=True)
+  photo = models.ImageField(upload_to='documents/', default='defo')
 
 class messages(models.Model):
   user_id = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
@@ -39,3 +40,7 @@ class messages(models.Model):
 class favorite(models.Model):
   user_id = models.ForeignKey(user_info, on_delete=models.CASCADE)
   post_id = models.ForeignKey(requests, on_delete=models.CASCADE)
+
+class Document(models.Model):
+  description = models.CharField(max_length=255, blank=True)
+  photo = models.ImageField(upload_to='documents/', default='defo')

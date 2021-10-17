@@ -2,10 +2,10 @@ from django.db.models.base import ModelStateFieldsCacheDescriptor
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import redirect, render
 from .models import requests, user_info, favorite, messages
-from .form import TestForm, PostForm, StatusForm
+from .form import TestForm, PostForm, StatusForm, DocumentForm
 from django.contrib.auth.decorators import login_required
+from .models import Document
 
-# Create your views here.F
 def index(request):
     posts = requests.objects.all().filter(matching_complete=False)
     header = ['ユーザー','タイトル','目的地','出発地','配達日時','詳細']
@@ -23,7 +23,7 @@ def post(request):
         'message': message,
     }
     if (request.method == "POST"):
-        my_dict['form'] = PostForm(request.POST)
+        my_dict['form'] = PostForm(request.POST, request.FILES)
         user = request.user
         post = requests(
             client_id=user,
@@ -33,6 +33,7 @@ def post(request):
             destination_place=request.POST.get('destination_place'),
             delivery_date=request.POST.get('delivery_date'),
             asking_price=request.POST.get('asking_price'),
+            photo=request.FILES.get('photo'),
         )
         post.save()
         return redirect('main:post')
