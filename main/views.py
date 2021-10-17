@@ -7,8 +7,8 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.F
 def index(request):
-    posts = requests.objects.all()
-    # posts = requests.objects.get(complete=False)
+    # posts = requests.objects.all()
+    posts = requests.objects.get(complete=False)
     header = ['ユーザー','タイトル','目的地','出発地','配達日時','詳細']
     my_dict2 = {
         'posts': posts,
@@ -64,7 +64,7 @@ def chat(request, num):
 @login_required
 def history(request):
     user = request.user
-    posts = requests.objects.all().filter(client_id=user, matching_complete=True)
+    posts = requests.objects.all().filter(client_id=user, matching_complete=True, request_complete=False)
     header = ['ユーザー','タイトル','目的地','出発地','配達日時','詳細']
     my_dict = {
         'posts': posts,
