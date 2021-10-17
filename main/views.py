@@ -38,6 +38,7 @@ def post(request):
         return redirect('main:post')
     return render(request, 'main/post.html', my_dict)
 
+@login_required
 def getMyPage(request):
     return render(request, 'main/mypage.html')
 
@@ -59,6 +60,13 @@ def chat(request, num):
         post_comment.save()
         return redirect('main:chat',  num=num)
     return render(request, 'main/chat.html', my_dict)
+
+def message(request):
+    return render(request, 'main/message.html')
+
+@login_required
+def payment(request):
+    return render(request, "main/payment.html")
 
 @login_required
 def history(request):
