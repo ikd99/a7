@@ -1,7 +1,10 @@
-{% extends "main/layout.html" %} 
+{% extends "main/layout.html" %}
 
 {% block mainblock %}
   <h1>マッチング一覧</h1>
+  <a href="{% url 'main:log_before' %}">
+    <button>取引前</button>
+  </a>
   <a href="{% url 'main:history' %}">
     <button>取引中</button>
   </a>
