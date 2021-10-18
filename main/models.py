@@ -6,7 +6,7 @@ from django.utils import timezone
 
 # Create your models here.
 class user_info(models.Model):
-  user_name = models.CharField(max_length=20, null=False)
+  user_name = models.ForeignKey(User, on_delete=models.CASCADE)
   is_driver = models.BooleanField(default=False, null=False)
   region = models.CharField(max_length=50, null=False)
   total_socore = models.FloatField(max_length=50)

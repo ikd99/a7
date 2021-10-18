@@ -2,7 +2,7 @@ from django.db.models.base import ModelStateFieldsCacheDescriptor
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import redirect, render
 from .models import requests, user_info, favorite, messages
-from .form import TestForm, PostForm, StatusForm, DocumentForm
+from .form import TestForm, PostForm, StatusForm, DocumentForm, UserForm
 from django.contrib.auth.decorators import login_required
 from .models import Document
 
@@ -38,6 +38,41 @@ def post(request):
         post.save()
         return redirect('main:post')
     return render(request, 'main/post.html', my_dict)
+
+def mypage(request):
+    # header = ['ユーザー名', 'ドライバーか', '地域']
+    # my_dict ={
+    #    'header': header,
+    #    'user' : user_info.objects.get(id=1),
+    #    # 'favorite': favorite.objects.get(id=1)
+    #}
+    # return render(request, 'main/mypage.html', my_dict)
+    return render(request, "main/mypage.html")
+
+@login_required
+def profile(request):
+    user = request.user
+    all_user = user_info.objects.all().filter(user_name=user)
+    use_dict = {
+        'form': UserForm,
+        "all_user_info": all_user,
+    }
+    if request.method == 'POST':
+        use_dict['form'] = UserForm(request.POST)
+        user = request.user
+        flag = False
+        if request.POST.get('is_driver') == 'on':
+            flag = True
+        default_eval = 3.0
+        post = user_info(
+            user_name=user, 
+            is_driver=flag,
+            region=request.POST.get('region'),
+            total_socore=default_eval,
+        )
+        post.save()
+        return redirect('main:profile')
+    return render(request, "main/profile.html", use_dict)
 
 @login_required
 def getMyPage(request):
