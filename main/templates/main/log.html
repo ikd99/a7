@@ -1,0 +1,120 @@
+{% extends "main/layout.html" %}
+
+{% block mainblock %}
+
+    <ul class="tab">
+        <li><a href="#log_before">取引前</a></li>
+        <li><a href="#log_matching">取引中</a></li>
+        <li><a href="#log_after">取引後</a></li>
+        <li><a href="#favorites">お気に入り</a></li>
+        <li><a href="#all_posts">全ての投稿</a></li>
+    </ul>
+
+    <div id="log_before" class="area">
+        <table>
+            <tr>
+                {% for col in header %}
+                <th>{{ col }}</th>
+                {% endfor %}
+            </tr>
+
+            {% for post in before_posts reversed %}
+            <tr>
+                <td>{{ post.client_id }}</td>
+                <td>{{ post.title }}</td>
+                <td>{{ post.departure_place }}</td>
+                <td>{{ post.destination_place }}</td>
+                <td>{{ post.delivery_date }}</td>
+                <td>{{ post.text }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <div id="log_matching" class="area">
+        <table>
+            <tr>
+                {% for col in header %}
+                <th>{{ col }}</th>
+                {% endfor %}
+            </tr>
+
+            {% for post in matching_posts reversed %}
+            <tr>
+                <td>{{ post.client_id }}</td>
+                <td>{{ post.title }}</td>
+                <td>{{ post.departure_place }}</td>
+                <td>{{ post.destination_place }}</td>
+                <td>{{ post.delivery_date }}</td>
+                <td>{{ post.text }}</td>
+                <td><a href="{% url 'main:chat' post.id %}">チャットルーム</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <div id="log_after" class="area">
+        <table>
+            <tr>
+                {% for col in header %}
+                <th>{{ col }}</th>
+                {% endfor %}
+            </tr>
+
+            {% for post in after_posts reversed %}
+            <tr>
+                <td>{{ post.client_id }}</td>
+                <td>{{ post.title }}</td>
+                <td>{{ post.departure_place }}</td>
+                <td>{{ post.destination_place }}</td>
+                <td>{{ post.delivery_date }}</td>
+                <td>{{ post.text }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <div id="favorites" class="area">
+        <table>
+            <tr>
+                {% for col in header %}
+                <th>{{ col }}</th>
+                {% endfor %}
+            </tr>
+
+            {% for post in favorite_posts reversed %}
+            <tr>
+                <td>{{ post.client_id }}</td>
+                <td>{{ post.title }}</td>
+                <td>{{ post.departure_place }}</td>
+                <td>{{ post.destination_place }}</td>
+                <td>{{ post.delivery_date }}</td>
+                <td>{{ post.text }}</td>
+                <td><a href="{% url 'main:detail' post.id %}">詳細画面</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <div id="all_posts" class="area">
+        <table>
+            <tr>
+                {% for col in header %}
+                <th>{{ col }}</th>
+                {% endfor %}
+            </tr>
+
+            {% for post in all_posts reversed %}
+            <tr>
+                <td>{{ post.client_id }}</td>
+                <td>{{ post.title }}</td>
+                <td>{{ post.departure_place }}</td>
+                <td>{{ post.destination_place }}</td>
+                <td>{{ post.delivery_date }}</td>
+                <td>{{ post.text }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+{% endblock %}
