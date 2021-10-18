@@ -83,6 +83,17 @@ def payment(request, num):
     return render(request, "main/payment.html", my_dict)
 
 @login_required
+def log_before(request):
+    user = request.user
+    posts = requests.objects.all().filter(client_id=user, request_complete=False, matching_complete=False)
+    header = ['ユーザー','タイトル','目的地','出発地','配達日時','詳細']
+    my_dict = {
+        'posts': posts,
+        'header': header,
+    }
+    return render(request, 'main/log_before.html', my_dict)
+
+@login_required
 def history(request):
     user = request.user
     posts = requests.objects.all().filter(client_id=user, request_complete=False, matching_complete=True)

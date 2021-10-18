@@ -11,6 +11,7 @@ urlpatterns = [
   path('detail/<int:num>', views.detail, name='detail'),
   path('request_complete/<int:num>', views.request_complete, name='request_complete'),
   path("payment/<int:num>", views.payment, name = "payment"),
+  path('log_before/', views.log_before, name='log_before'),
   path('history/', views.history, name='history'),
   path('done_post/', views.done_post, name='done_post'),
   path('favorites/', views.favorites, name='favorites'),
