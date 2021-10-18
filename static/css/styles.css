@@ -3,7 +3,7 @@ body {
   margin: 0;
   padding: 0;
   color: #1a1a1a;
-  font-family: 'Noto Sans JP', sans-serif;
+  font-family: "Noto Sans JP", sans-serif;
   background: #f6f5f4;
 }
 
@@ -41,7 +41,11 @@ header {
   width: 100%;
 }
 
-#icons,  #post_add, #home, #message, #person{
+#icons,
+#post_add,
+#home,
+#message,
+#person {
   font-size: 100px;
 }
 
@@ -137,7 +141,32 @@ nav {
   padding: 3% 3% 3% 50px;
   transition: all .5s ease;
 }
+/* チャットのcss */
 
+
+.payment-modal {
+  display: none;
+  position: fixed;
+  z-index: 2;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+  align-items: center;
+  justify-content: center;
+}
+
+.content {
+  /* background-color: white; */
+  width: 500px;
+  height: 70%;
+}
+
+.modal-body {
+  color: #d3d3d3;
+}
 /*アイコンの＋と×*/
 .title::before,
 .title::after{
