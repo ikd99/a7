@@ -83,59 +83,78 @@ def payment(request, num):
     return render(request, "main/payment.html", my_dict)
 
 @login_required
-def log_before(request):
+def log(request):
     user = request.user
-    posts = requests.objects.all().filter(client_id=user, request_complete=False, matching_complete=False)
+    before_posts = requests.objects.all().filter(client_id=user, matching_complete=False)
+    matching_posts = requests.objects.all().filter(client_id=user, matching_complete=True, request_complete=False)
+    after_posts = requests.objects.all().filter(client_id=user, request_complete=True)
+    favorites_posts = requests.objects.all().filter(request_complete=False) #お気に入り機能できたら修正
+    all_posts = requests.objects.all().filter(client_id=user)
     header = ['ユーザー','タイトル','目的地','出発地','配達日時','詳細']
     my_dict = {
-        'posts': posts,
+        'before_posts': before_posts,
+        'matching_posts': matching_posts,
+        'after_posts': after_posts,
+        'favorites_posts': favorites_posts,
+        'all_posts': all_posts,
         'header': header,
     }
-    return render(request, 'main/log_before.html', my_dict)
+    return render(request, 'main/log.html', my_dict)
 
-@login_required
-def history(request):
-    user = request.user
-    posts = requests.objects.all().filter(client_id=user, request_complete=False, matching_complete=True)
-    header = ['ユーザー','タイトル','目的地','出発地','配達日時','詳細']
-    my_dict = {
-        'posts': posts,
-        'header': header,
-    }
-    return render(request, 'main/history.html', my_dict)
+# @login_required
+# def log_before(request):
+#     user = request.user
+#     posts = requests.objects.all().filter(client_id=user, request_complete=False, matching_complete=False)
+#     header = ['ユーザー','タイトル','目的地','出発地','配達日時','詳細']
+#     my_dict = {
+#         'posts': posts,
+#         'header': header,
+#     }
+#     return render(request, 'main/log_before.html', my_dict)
 
-@login_required
-def favorites(request):
-    user = request.user
-    posts = requests.objects.all().filter(client_id=user, matching_complete=True)
-    header = ['ユーザー','タイトル','目的地','出発地','配達日時','詳細']
-    my_dict = {
-        'posts': posts,
-        'header': header,
-    }
-    return render(request, 'main/favorites.html', my_dict)
+# @login_required
+# def history(request):
+#     user = request.user
+#     posts = requests.objects.all().filter(client_id=user, request_complete=False, matching_complete=True)
+#     header = ['ユーザー','タイトル','目的地','出発地','配達日時','詳細']
+#     my_dict = {
+#         'posts': posts,
+#         'header': header,
+#     }
+#     return render(request, 'main/history.html', my_dict)
 
-@login_required
-def done_post(request):
-    user = request.user
-    posts = requests.objects.all().filter(client_id=user)
-    header = ['ユーザー','タイトル','目的地','出発地','配達日時','詳細']
-    my_dict = {
-        'posts': posts,
-        'header': header,
-    }
-    return render(request, 'main/done_post.html', my_dict)
+# @login_required
+# def match_complete(request):
+#     user = request.user
+#     header = ['ユーザー','タイトル','目的地','出発地','配達日時','詳細']
+#     posts = requests.objects.all().filter(client_id=user, request_complete=True)
+#     my_dict = {
+#         'posts': posts,
+#         'header': header,
+#     }
+#     return render(request, 'main/match_complete.html', my_dict)
 
-@login_required
-def match_complete(request):
-    user = request.user
-    header = ['ユーザー','タイトル','目的地','出発地','配達日時','詳細']
-    posts = requests.objects.all().filter(client_id=user, request_complete=True)
-    my_dict = {
-        'posts': posts,
-        'header': header,
-    }
-    return render(request, 'main/match_complete.html', my_dict)
+# @login_required
+# def favorites(request):
+#     user = request.user
+#     posts = requests.objects.all().filter(client_id=user, matching_complete=True)
+#     header = ['ユーザー','タイトル','目的地','出発地','配達日時','詳細']
+#     my_dict = {
+#         'posts': posts,
+#         'header': header,
+#     }
+#     return render(request, 'main/favorites.html', my_dict)
+
+# @login_required
+# def done_post(request):
+#     user = request.user
+#     posts = requests.objects.all().filter(client_id=user)
+#     header = ['ユーザー','タイトル','目的地','出発地','配達日時','詳細']
+#     my_dict = {
+#         'posts': posts,
+#         'header': header,
+#     }
+#     return render(request, 'main/done_post.html', my_dict)
 
 @login_required
 def detail(request, num):
