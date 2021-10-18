@@ -2,7 +2,7 @@ from django.db.models.base import ModelStateFieldsCacheDescriptor
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import redirect, render
 from .models import requests, user_info, favorite, messages
-from .form import TestForm, PostForm, StatusForm
+from .form import TestForm, PostForm, StatusForm, UserForm
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.F
@@ -60,15 +60,16 @@ def profile(request):
     }
     if request.method == 'POST':
         use_dict['form'] = UserForm(request.POST)
-        #user = request.user
-        print(use_dict['form'])
-        print(request.POST('is_driver'))
-        print(request.POST.get('region'))
-        post = requests(
-            # user_name=user, 
-            is_driver=request.POST('is_driver'), 
-            region=request.POST('region'),
-            # total_socore=request.POST.get('total_socore'),
+        user = request.user
+        flag = False
+        if request.POST.get('is_driver') == 'on':
+            flag = True
+        default_eval = 3.0
+        post = user_info(
+            user_name=user, 
+            is_driver=flag,
+            region=request.POST.get('region'),
+            total_socore=default_eval,
         )
         post.save()
         return redirect('main:profile')

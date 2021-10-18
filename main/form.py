@@ -30,17 +30,10 @@ class TestForm(forms.Form):
 
 class UserForm(forms.Form):
     is_driver = forms.BooleanField(label='ドライバー登録', required=True)
-    region = forms.CharField(label='地域', required=True)
-    # total_socore = forms.FloatField(label='総合評価')
-
-    text = forms.CharField(label='コメント')
-
-# class StatusForm(forms.Form):
-#     status = forms.BooleanField(label='マッチングする', required=False)
+    region = forms.CharField(label='地域（例：〇〇県〇市）', required=True)
 
 def wrap_boolean_check(v):
     return not (v is False or v is None or v == '' or v == 0)
-
 
 class StatusForm(forms.Form):
     check = forms.BooleanField(
