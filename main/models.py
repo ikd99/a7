@@ -34,8 +34,8 @@ class messages(models.Model):
   text = models.TextField(max_length=1000, null=False)
 
 # class payment(models.Model):
-#   post_id = models.ForeignKey(requests, on_delete=models.PROTECT)
-#   payment_amount = models.IntegerField(null=False)
+#  post_id = models.ForeignKey(requests, on_delete=models.PROTECT)
+#  payment_amount = models.IntegerField(null=False)
 
 class favorite(models.Model):
   user_id = models.ForeignKey(user_info, on_delete=models.CASCADE)
