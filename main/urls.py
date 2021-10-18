@@ -13,8 +13,12 @@ urlpatterns = [
   path('evaluation/<int:num>', views.evaluation, name='evaluation'),
   path('request_complete/<int:num>', views.request_complete, name='request_complete'),
   path("payment/<int:num>", views.payment, name = "payment"),
-  path('history/', views.history, name='history'),
-  path('done_post/', views.done_post, name='done_post'),
-  path('favorites/', views.favorites, name='favorites'),
-  path('match_complete/', views.match_complete, name='match_complete'),
+  path('log/', views.log, name='log'),
+
+  # ↓以下使っていません
+  # path('log_before/', views.log_before, name='log_before'),
+  # path('history/', views.history, name='history'),
+  # path('match_complete/', views.match_complete, name='match_complete'),
+  # path('favorites/', views.favorites, name='favorites'),
+  # path('done_post/', views.done_post, name='done_post'),
 ]
