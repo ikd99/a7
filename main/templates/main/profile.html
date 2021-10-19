@@ -1,0 +1,38 @@
+{% extends "main/layout.html" %} 
+{% load django_bootstrap5 %}
+
+{% block mainblock %}
+    <p>アカウント名：{{user}}　会員番号：{{user.id}}</p>
+    {% if all_user_info %}
+        <h1>ユーザー情報</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>user_name</th>
+                    <th>is_driver</th>
+                    <th>region</th>
+                    <th>total_socore</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in all_user_info %}
+                        <tr>
+                            <th>{{i.user_name}}</th>
+                            <th>{{i.is_driver}}</th>
+                            <th>{{i.region}}</th>
+                            <th>{{i.total_socore}}</th>
+                        </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <h2>ユーザー情報編集</h2>
+            <form action="{% url 'main:profile' %}" method="post">
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                {% bootstrap_button button_type="submit" content="登録" %}
+                <!--{{ form.as_table }}-->
+                <!--<button type="submit" name="saving">保存</button> -->
+            </form>
+    {% endif %}
+{% endblock %}

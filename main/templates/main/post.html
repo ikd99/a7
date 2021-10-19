@@ -3,7 +3,7 @@
 {% block mainblock %}
   <h1>案件投稿画面</h1>
   <table>
-    <form action="{% url 'main:post' %}" method="post">
+    <form action="{% url 'main:post' %}" method="post" enctype="multipart/form-data">
       {% csrf_token %} 
       {{ form.as_table }}
       <tr>

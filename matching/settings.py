@@ -111,6 +111,10 @@ LANGUAGE_CODE = 'ja'
 
 TIME_ZONE = 'Asia/Tokyo'
 
+# 画像アップロード関連
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
 USE_I18N = True
 
 USE_L10N = True

@@ -13,16 +13,21 @@
         <th>{{ col }}</th>
         {% endfor %}
       </tr>
+      {% for post in posts reversed %}
       <tr>
-        {% for post in posts reversed %}
         <td>{{ post.client_id }}</td>
         <td>{{ post.title }}</td>
         <td>{{ post.departure_place }}</td>
         <td>{{ post.destination_place }}</td>
         <td>{{ post.delivery_date }}</td>
         <td>{{ post.text }}</td>
-        {% endfor %}
       </tr>
     </table>
+      {% if post.photo %}
+        <div>
+          <img src="{{ post.photo.url }}" width="50%" height="50%"/>
+        </div>
+      {% endif %}
+      {% endfor %}
   </form>
 {% endblock %}
