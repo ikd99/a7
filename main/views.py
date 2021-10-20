@@ -1,8 +1,8 @@
 from django.db.models.base import ModelStateFieldsCacheDescriptor
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import redirect, render
-from .models import requests, user_info, favorite, messages
-from .form import TestForm, PostForm, StatusForm, DocumentForm, UserForm
+from .models import requests, user_info, favorite, messages, matchdriver
+from .form import TestForm, PostForm, StatusForm, DocumentForm, UserForm, EvaForm
 from django.contrib.auth.decorators import login_required
 from .models import Document
 
@@ -226,3 +226,80 @@ def request_complete(request, num):
 #         'header': header,
 #     }
 #     return render(request, 'main/done_post.html', my_dict)
+
+@login_required
+def detail(request, num):
+    posts = requests.objects.all().filter(id=num)
+    post_room = requests.objects.get(id=num)
+    print(num)
+    header = ['ユーザー','タイトル','目的地','出発地','配達日時','詳細']
+    my_dict = {
+        'id': num,
+        'posts': posts,
+        'header': header,
+        'form': StatusForm,
+    }
+    if (request.method == "POST"):
+        match = requests.objects.get(id=num)
+        match.matching_complete = True
+        match.save()
+        user = request.user
+        matchdriver(
+            post_id = post_room,
+            driver_id = user
+        ).save()
+        return redirect('main:chat',  num=num)
+    return render(request, 'main/detail.html', my_dict)
+
+@login_required
+def request_complete(request, num):
+    posts = requests.objects.all().filter(id=num)
+    print(num)
+    header = ['ユーザー','タイトル','目的地','出発地','配達日時','詳細']
+    my_dict = {
+        'id': num,
+        'posts': posts,
+        'header': header,
+        'form': StatusForm,
+    }
+    if (request.method == "POST"):
+        match = requests.objects.get(id=num)
+        match.request_complete = True
+        match.save()
+        return redirect('main:evaluation', num=num)
+    return render(request, 'main/request_complete.html', my_dict)
+
+@login_required
+def evaluation(request, num):
+    posts = requests.objects.all().filter(id=num)
+    my_dict = {
+        'id': num,
+        'posts': posts,
+        'form': EvaForm,
+    }
+    # 依頼者のUser_info
+    c = requests.objects.get(id=num)
+    c_user = user_info.objects.get(user_name=c.client_id)
+    print(c_user)
+    # ドライバーのUser_info
+    d = matchdriver.objects.get(post_id=num)
+    d_user = user_info.objects.get(user_name=d.driver_id)
+    # ログインユーザーのUser _info
+    user = request.user
+    login = user_info.objects.get(user_name=user)
+    if (request.method == "POST"):
+        if (login.is_driver == False): #ログインユーザーが依頼者の時
+            casenumber = float(d_user.total_number) + float(1)
+            d_user.total_number = casenumber
+            total = d_user.total_socore
+            d_user.total_socore = (float(request.POST.get('eva')) + float(total)) / float(d_user.total_number)
+            print(d_user.total_socore)
+            d_user.save()
+        else:
+            casenumber = float(d_user.total_number) + float(1)
+            c_user.total_number = casenumber
+            total = c_user.total_socore
+            c_user.total_socore = (float(request.POST.get('eva')) + float(total)) / float(c_user.total_number)
+            c_user.save()
+        return redirect('main:log')
+    return render(request, 'main/evaluation.html', my_dict)
