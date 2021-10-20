@@ -36,8 +36,45 @@ def post(request):
             photo=request.FILES.get('photo'),
         )
         post.save()
-        return redirect('main:post')
-    return render(request, 'main/post.html', my_dict)
+        return redirect('main:log')
+    return render(request, 'main/post.html')
+
+@login_required
+def detail(request, num):
+    posts = requests.objects.all().filter(id=num)
+    print(num)
+    header = ['ユーザー','タイトル','目的地','出発地','配達日時','希望料金(円)','詳細']
+    my_dict = {
+        'id': num,
+        'posts': posts,
+        'header': header,
+        'form': StatusForm,
+    }
+    if (request.method == "POST"):
+        match = requests.objects.get(id=num)
+        match.matching_complete = True
+        match.save()
+        return redirect('main:chat',  num=num)
+    return render(request, 'main/detail.html', my_dict)
+
+@login_required
+def log(request):
+    user = request.user
+    before_posts = requests.objects.all().filter(client_id=user, matching_complete=False)
+    matching_posts = requests.objects.all().filter(client_id=user, matching_complete=True, request_complete=False)
+    after_posts = requests.objects.all().filter(client_id=user, request_complete=True)
+    favorites_posts = requests.objects.all().filter(request_complete=False) #お気に入り機能できたら修正
+    all_posts = requests.objects.all().filter(client_id=user)
+    header = ['ユーザー','タイトル','目的地','出発地','配達日時','詳細']
+    my_dict = {
+        'before_posts': before_posts,
+        'matching_posts': matching_posts,
+        'after_posts': after_posts,
+        'favorites_posts': favorites_posts,
+        'all_posts': all_posts,
+        'header': header,
+    }
+    return render(request, 'main/log.html', my_dict)
 
 def mypage(request):
     # header = ['ユーザー名', 'ドライバーか', '地域']
@@ -65,7 +102,7 @@ def profile(request):
             flag = True
         default_eval = 3.0
         post = user_info(
-            user_name=user, 
+            user_name=user,
             is_driver=flag,
             region=request.POST.get('region'),
             total_socore=default_eval,
@@ -118,23 +155,23 @@ def payment(request, num):
     return render(request, "main/payment.html", my_dict)
 
 @login_required
-def log(request):
-    user = request.user
-    before_posts = requests.objects.all().filter(client_id=user, matching_complete=False)
-    matching_posts = requests.objects.all().filter(client_id=user, matching_complete=True, request_complete=False)
-    after_posts = requests.objects.all().filter(client_id=user, request_complete=True)
-    favorites_posts = requests.objects.all().filter(request_complete=False) #お気に入り機能できたら修正
-    all_posts = requests.objects.all().filter(client_id=user)
+def request_complete(request, num):
+    posts = requests.objects.all().filter(id=num)
+    print(num)
     header = ['ユーザー','タイトル','目的地','出発地','配達日時','詳細']
     my_dict = {
-        'before_posts': before_posts,
-        'matching_posts': matching_posts,
-        'after_posts': after_posts,
-        'favorites_posts': favorites_posts,
-        'all_posts': all_posts,
+        'id': num,
+        'posts': posts,
         'header': header,
+        'form': StatusForm,
     }
-    return render(request, 'main/log.html', my_dict)
+    if (request.method == "POST"):
+        match = requests.objects.get(id=num)
+        match.request_complete = True
+        match.save()
+        return redirect('main:match_complete')
+    return render(request, 'main/request_complete.html', my_dict)
+
 
 # @login_required
 # def log_before(request):
@@ -190,39 +227,3 @@ def log(request):
 #         'header': header,
 #     }
 #     return render(request, 'main/done_post.html', my_dict)
-
-@login_required
-def detail(request, num):
-    posts = requests.objects.all().filter(id=num)
-    print(num)
-    header = ['ユーザー','タイトル','目的地','出発地','配達日時','詳細']
-    my_dict = {
-        'id': num,
-        'posts': posts,
-        'header': header,
-        'form': StatusForm,
-    }
-    if (request.method == "POST"):
-        match = requests.objects.get(id=num)
-        match.matching_complete = True
-        match.save()
-        return redirect('main:chat',  num=num)
-    return render(request, 'main/detail.html', my_dict)
-
-@login_required
-def request_complete(request, num):
-    posts = requests.objects.all().filter(id=num)
-    print(num)
-    header = ['ユーザー','タイトル','目的地','出発地','配達日時','詳細']
-    my_dict = {
-        'id': num,
-        'posts': posts,
-        'header': header,
-        'form': StatusForm,
-    }
-    if (request.method == "POST"):
-        match = requests.objects.get(id=num)
-        match.request_complete = True
-        match.save()
-        return redirect('main:match_complete')
-    return render(request, 'main/request_complete.html', my_dict)

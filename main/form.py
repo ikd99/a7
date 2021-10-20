@@ -12,10 +12,9 @@ class PostForm(forms.Form):
     delivery_date = forms.DateField(label='配達希望日')
     asking_price = forms.IntegerField(label='希望価格（日）')
     photo = forms.ImageField(label='画像アップロード')
-    
+
 class TestForm(forms.Form):
     text = forms.CharField(label='文字入力')
-
 
 class UserForm(forms.Form):
     is_driver = forms.BooleanField(label='ドライバー登録', required=True)

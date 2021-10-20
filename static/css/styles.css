@@ -9,7 +9,7 @@ body {
   padding: 0;
   color: #1a1a1a;
   font-family: "Noto Sans JP", sans-serif;
-  background: #f6f5f4;
+  background-color: #f0f0f0;
 }
 
 header {
@@ -212,6 +212,89 @@ transform: rotate(-45deg);
 }
 
 /* index.htmlのcssここまで */
+
+
+/* post.htmlのcssここから */
+
+.wrapper {
+  margin: 30px;
+  padding: 30px 60px;
+}
+
+form div {
+  margin-bottom: 40px;
+}
+.upload {
+  margin-bottom: 20px;
+}
+label {
+  font-size: 2rem;
+  color: #060606;
+  margin-bottom: 16px;
+  /* display: block; */
+}
+input[type="text"],
+input[type="date"],
+input[type="number"],
+textarea {
+  display: block;
+  background: rgba(255, 255, 255, .5);
+  border: 1px #fff solid;
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 2.125rem;
+  width: 100%;
+}
+textarea {
+  height: 18rem;
+}
+
+.upload-label {
+  display: block;
+  cursor: pointer; /* カーソルを指に */
+  margin: 0;
+  padding: 16px; /* 文字まわりの余白 */
+  line-height: 1.4; /* 行間 */
+  background: #88acea; /* 背景色 */
+  color: #FFF; /* 文字色 */
+  font-size: 1.5rem; /* フォントサイズ */
+  border-radius: 4px; /* 角の丸み */
+
+  text-align: center;
+  width: 30%;
+}
+.upload-label input {
+  display: none;
+}
+
+#preview {
+  max-width: 600px;
+  margin-bottom: 20px;
+  border: solid 1px silver;
+}
+
+input[type="submit"] {
+  margin-top: 40px;
+}
+.button {
+  display: block;
+  margin: 0 auto;
+  padding: 0.5em 1em;
+  text-decoration: none;
+  background: #668ad8;
+  color: #FFF;
+  font-size: 1.75rem;
+  border-radius: 4px;
+  box-shadow: 0px 0px 0px 5px #668ad8;
+  border: dashed 2px #FFF;
+
+  cursor: pointer;
+  line-height: 1.8;
+  text-align: center;
+  width: 45%;
+}
+
+/* post.htmlのcssここまで */
 
 
 /* チャットのcss */
