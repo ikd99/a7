@@ -10,7 +10,7 @@
         <section>
 
           <span>ユーザー名: {{ post.client_id }}</span>
-          <span>投稿日時: </span> {% comment %} 投稿日時(時刻含めて)を設定したい {% endcomment %}
+          <span>投稿日時: {{ post.post_time }}</span>
           {% if post.photo %}
             <div>
               <img src="{{ post.photo.url }}" id="resizeImage">
