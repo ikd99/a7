@@ -37,11 +37,7 @@ class messages(models.Model):
 class matchdriver(models.Model):
   driver_id = models.ForeignKey(User, on_delete=models.CASCADE)
   post_id = models.ForeignKey(requests, on_delete=models.CASCADE)
-
-# class payment(models.Model):
-#   post_id = models.ForeignKey(requests, on_delete=models.PROTECT)
-#   payment_amount = models.IntegerField(null=False)
-
+  
 class favorite(models.Model):
   user_id = models.ForeignKey(user_info, on_delete=models.CASCADE)
   post_id = models.ForeignKey(requests, on_delete=models.CASCADE)
