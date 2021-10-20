@@ -13,21 +13,20 @@ class PostForm(forms.Form):
     asking_price = forms.IntegerField(label='希望価格（日）')
     photo = forms.ImageField(label='画像アップロード')
 
+def wrap_boolean_check(v):
+    return not (v is False or v is None or v == '' or v == 0)
+class StatusForm(forms.Form):
+    確認しました = forms.BooleanField(
+        initial=0,
+        widget=forms.CheckboxInput(check_test=wrap_boolean_check)
+    )
+
 class TestForm(forms.Form):
     text = forms.CharField(label='文字入力')
 
 class UserForm(forms.Form):
     is_driver = forms.BooleanField(label='ドライバー登録', required=True)
     region = forms.CharField(label='地域（例：〇〇県〇市）', required=True)
-
-def wrap_boolean_check(v):
-    return not (v is False or v is None or v == '' or v == 0)
-
-class StatusForm(forms.Form):
-    確認しました = forms.BooleanField(
-        initial=1,
-        widget=forms.CheckboxInput(check_test=wrap_boolean_check)
-    )
 
 class DocumentForm(forms.ModelForm):
     class Meta:

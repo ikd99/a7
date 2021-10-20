@@ -8,12 +8,29 @@ from .models import Document
 
 def index(request):
     posts = requests.objects.all().filter(matching_complete=False)
-    header = ['ユーザー','タイトル','目的地','出発地','配達日時','詳細']
-    my_dict2 = {
+    regional_posts = {
+        'posts': posts,
+    }
+    return render(request, 'main/index.html', regional_posts)
+
+@login_required
+def detail(request, num):
+    posts = requests.objects.all().filter(id=num)
+    # print(num)
+    header = ['ユーザー','タイトル','目的地','出発地','配達日時','希望料金(円)','詳細']
+    my_dict = {
+        'id': num,
         'posts': posts,
         'header': header,
+        'form': StatusForm,
     }
-    return render(request, 'main/index.html', my_dict2)
+
+    if (request.method == "POST"):
+        match = requests.objects.get(id=num)
+        match.matching_complete = True
+        match.save()
+        return redirect('main:chat',  num=num)
+    return render(request, 'main/detail.html', my_dict)
 
 @login_required
 def post(request):
@@ -38,24 +55,6 @@ def post(request):
         post.save()
         return redirect('main:log')
     return render(request, 'main/post.html')
-
-@login_required
-def detail(request, num):
-    posts = requests.objects.all().filter(id=num)
-    print(num)
-    header = ['ユーザー','タイトル','目的地','出発地','配達日時','希望料金(円)','詳細']
-    my_dict = {
-        'id': num,
-        'posts': posts,
-        'header': header,
-        'form': StatusForm,
-    }
-    if (request.method == "POST"):
-        match = requests.objects.get(id=num)
-        match.matching_complete = True
-        match.save()
-        return redirect('main:chat',  num=num)
-    return render(request, 'main/detail.html', my_dict)
 
 @login_required
 def log(request):

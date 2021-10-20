@@ -137,6 +137,13 @@ nav {
   font-size: 1.25rem;
 }
 
+/* 依頼一覧画像のリサイズ */
+#resizeImage {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+
 /*アコーディオンタイトル*/
 .title {
   position: relative;/*+マークの位置基準とするためrelative指定*/

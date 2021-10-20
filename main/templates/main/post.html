@@ -61,7 +61,7 @@
     var today = new Date().toISOString().split('T')[0];
     document.getElementsByName("delivery_date")[0].setAttribute('min', today);
 
-{% comment %} 画像のプレビューイメージ {% endcomment %}
+  {% comment %} 画像のプレビューイメージ {% endcomment %}
     function previewImage(obj) {
       var fileReader = new FileReader();
       fileReader.onload = (function() {
