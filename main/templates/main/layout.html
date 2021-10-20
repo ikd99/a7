@@ -35,32 +35,40 @@
       <div class="header-main"></div>
     </main>
 
-    <footer>
-      <nav class="pc-nav">
-        <ul>
-          <li>
-            <a href="{% url 'main:index' %}">
-              <span class="material-icons" id="home"> home </span>
-            </a>
-          </li>
-          <li>
-            <a href="{% url 'main:post' %}">
-              <span class="material-icons" id="post_add"> post_add </span>
-            </a>
-          </li>
-          <li>
-            <a href="{% url 'main:log' %}">
-              <span class="material-icons" id="history"> history </span>
-            </a>
-          </li>
-          <li>
-            <a href="{% url 'main:mypage' %}">
-              <span class="material-icons" id="person"> person </span>
-            </a>
-          </li>
-        </ul>
-      </nav>
-    </footer>
+      <footer>
+        <nav class="pc-nav">
+          <ul>
+            <li>
+              <a href="{% url 'main:index' %}">
+                <span class="material-icons" id="home">
+                  home
+                </span>
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'main:post' %}">
+                <span class="material-icons" id="post_add">
+                  post_add
+                </span>
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'main:log' %}">
+                <span class="material-icons" id="history">
+                  history
+                </span>
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'main:profile' %}">
+                <span class="material-icons" id="person">
+                  person
+                </span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </footer>
 
     <script
       src="https://code.jquery.com/jquery-3.4.1.min.js"
