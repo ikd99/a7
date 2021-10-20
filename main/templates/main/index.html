@@ -1,7 +1,7 @@
 {% extends "main/layout.html" %}
 
 {% block mainblock %}
-  <h1>地域の依頼一覧</h1>
+  {% comment %} <h1>地域の依頼一覧</h1> {% endcomment %}
 
   <ul class="accordion-area">
   {% for post in posts reversed %}
@@ -10,7 +10,7 @@
         <section>
 
           <span>ユーザー名: {{ post.client_id }}</span>
-          <span>投稿日時: {{ post.post_time }}</span>
+          <span>投稿日時: {{ post.post_time　}}</span>
           {% if post.photo %}
             <div>
               <img src="{{ post.photo.url }}" id="resizeImage">
