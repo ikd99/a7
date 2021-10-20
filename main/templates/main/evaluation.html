@@ -2,5 +2,12 @@
 
 {% block mainblock %}
   <h1>評価画面</h1>
-  
+  <h2>取引相手の評価を選択して送信してください</h2>
+  <p>５段階評価</p>
+  <form action="{% url 'main:evaluation' id %}" method="post">
+    {% csrf_token %} 
+    {{ form.as_table }}
+    <input type="submit" value="評価を送信する" />
+  </form>
+  <p>評価を送信すると履歴ページに遷移します</p>
 {% endblock %}

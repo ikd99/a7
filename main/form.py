@@ -16,6 +16,8 @@ class PostForm(forms.Form):
 class TestForm(forms.Form):
     text = forms.CharField(label='文字入力')
 
+class EvaForm(forms.Form):
+    eva = forms.FloatField(label='評価')
 
 class UserForm(forms.Form):
     is_driver = forms.BooleanField(label='ドライバー登録', required=True)

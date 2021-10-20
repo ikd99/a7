@@ -2,7 +2,7 @@ from django.db.models.base import ModelStateFieldsCacheDescriptor
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import redirect, render
 from .models import requests, user_info, favorite, messages
-from .form import TestForm, PostForm, StatusForm, DocumentForm, UserForm
+from .form import TestForm, PostForm, StatusForm, DocumentForm, UserForm, EvaForm
 from django.contrib.auth.decorators import login_required
 from .models import Document
 
@@ -229,4 +229,14 @@ def request_complete(request, num):
 
 @login_required
 def evaluation(request, num):
-    return render(request, 'main/evaluation.html')
+    posts = requests.objects.all().filter(id=num)
+    eva = requests.objects.get(id=num)
+    user = request.user
+    my_dict = {
+        'id': num,
+        'posts': posts,
+        'form': EvaForm,
+    }
+    if (request.method == "POST"):
+        return redirect('main:log')
+    return render(request, 'main/evaluation.html', my_dict)
