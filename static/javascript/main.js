@@ -42,7 +42,7 @@ function link (hashIDName){
 $('.tab a').on('click', function() {
 	var idName = $(this).attr('href'); //タブ内のリンク名を取得
 	link (idName);//設定したタブの読み込みと
-  console.log(idName)
+  // console.log(idName)
 	return false;//aタグを無効にする
 });
 
@@ -51,11 +51,18 @@ $(window).on('load', function () {
   $('.tab li:first-of-type').addClass("active"); //最初のliにactiveクラスを追加
   $('.area:first-of-type').addClass("is-active"); //最初の.areaにis-activeクラスを追加
   var hashName = "#log_before"; //リンク元の指定されたURLのハッシュタグを取得
-  console.log(hashName)
+  // console.log(hashName)
   link (hashName);//設定したタブの読み込み
 });
 
 // log.htmlのjsここまで
+
+
+// post.htmlのjsここから
+
+  // うまくいかなかったのでhtml内に<script>で直接記述
+
+// post.htmlのjsここまで
 
 
 // ↓以下payment.htmlでエラーが起きるみたいなので一旦コメントアウト
