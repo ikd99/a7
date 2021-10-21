@@ -1,10 +1,12 @@
 from django.db.models.base import ModelStateFieldsCacheDescriptor
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import redirect, render
-from .models import requests, user_info, favorite, messages, matchdriver
+from .models import driver_requests, requests, user_info, favorite, messages, matchdriver
 from .form import TestForm, PostForm, StatusForm, DocumentForm, UserForm, EvaForm
 from django.contrib.auth.decorators import login_required
 from .models import Document
+from django.core.exceptions import ObjectDoesNotExist
+
 
 def index(request):
     posts = requests.objects.all().filter(matching_complete=False)
@@ -115,7 +117,37 @@ def log(request):
     after_posts = requests.objects.all().filter(client_id=user, request_complete=True)
     favorites_posts = requests.objects.all().filter(request_complete=False) #お気に入り機能できたら修正
     all_posts = requests.objects.all().filter(client_id=user)
-    header = ['ユーザー','タイトル','目的地','出発地','配達日時','詳細']
+    # ログインユーザーのUser_info
+    login = user_info.objects.get(user_name=user)
+    header = ['ユーザー','タイトル', '目的地','出発地','配達日時','詳細']
+    # d_header = ['タイトル','目的地','出発地','配達日時','詳細']
+    if (login.is_driver == True): # ドライバーの時
+        match_log = matchdriver.objects.all().filter(driver_id=user)
+        for list in match_log:
+            log_all = requests.objects.get(id=list.post_id)        
+            driver_requests(
+                md_id=user,
+                title = log_all.title,
+                matching_complete = log_all.matching_complete,
+                request_complete = log_all.request_complete,
+                payment = log_all.payment,
+                share_or_not = log_all.share_or_not,
+                post_time = log_all.post_time,
+                text = log_all.text,
+                departure_place = log_all.departure_place,
+                destination_place = log_all.destination_place,
+                delivery_date = log_all.delivery_date,
+                asking_price = log_all.asking_price,
+                driver_evaluation = log_all.driver_evaluation,
+                client_evaluation = log_all.client_evaluation,
+                photo = log_all.photo,
+            ).save()
+        dr = driver_requests.objects.filter(md_id=user).values('title', 'matching_complete', 'request_complete', 'payment', 'text', 'departure_place', 'destination_place', 'delivery_date', 'asking_price').distinct()
+        print(dr)
+        before_posts = dr.all().filter(md_id=user, matching_complete=False)
+        matching_posts = dr.all().filter(md_id=user, matching_complete=True, request_complete=False)
+        after_posts = dr.all().filter(md_id=user, request_complete=True)
+        header.pop(0)
     my_dict = {
         'before_posts': before_posts,
         'matching_posts': matching_posts,
@@ -123,13 +155,14 @@ def log(request):
         'favorites_posts': favorites_posts,
         'all_posts': all_posts,
         'header': header,
+        'login': login,
     }
     return render(request, 'main/log.html', my_dict)
 
 @login_required
 def detail(request, num):
     posts = requests.objects.all().filter(id=num)
-    post_room = requests.objects.get(id=num)
+    # post_room = requests.objects.get(id=num)
     print(num)
     header = ['ユーザー','タイトル','目的地','出発地','配達日時','詳細']
     my_dict = {
@@ -144,7 +177,7 @@ def detail(request, num):
         match.save()
         user = request.user
         matchdriver(
-            post_id = post_room,
+            post_id = num,
             driver_id = user
         ).save()
         return redirect('main:chat',  num=num)
