@@ -19,10 +19,6 @@ class TestForm(forms.Form):
 class EvaForm(forms.Form):
     eva = forms.FloatField(label='評価')
 
-class UserForm(forms.Form):
-    is_driver = forms.BooleanField(label='ドライバー登録', required=True)
-    region = forms.CharField(label='地域（例：〇〇県〇市）', required=True)
-
 def wrap_boolean_check(v):
     return not (v is False or v is None or v == '' or v == 0)
 class StatusForm(forms.Form):
@@ -35,7 +31,7 @@ class TestForm(forms.Form):
     text = forms.CharField(label='文字入力')
 
 class UserForm(forms.Form):
-    is_driver = forms.BooleanField(label='ドライバー登録', required=True)
+    is_driver = forms.BooleanField(label='ドライバー登録', required=False)
     region = forms.CharField(label='地域（例：〇〇県〇市）', required=True)
 
 class DocumentForm(forms.ModelForm):

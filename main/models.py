@@ -7,7 +7,7 @@ from django.utils import timezone
 # Create your models here.
 class user_info(models.Model):
   user_name = models.ForeignKey(User, on_delete=models.CASCADE)
-  is_driver = models.BooleanField(default=False, null=False)
+  is_driver = models.BooleanField(default=False)
   region = models.CharField(max_length=50, null=False)
   total_socore = models.FloatField(max_length=50)
   total_number = models.FloatField(max_length=50, default=1)
@@ -39,8 +39,8 @@ class matchdriver(models.Model):
   post_id = models.ForeignKey(requests, on_delete=models.CASCADE)
 
 # class payment(models.Model):
-#   post_id = models.ForeignKey(requests, on_delete=models.PROTECT)
-#   payment_amount = models.IntegerField(null=False)
+#  post_id = models.ForeignKey(requests, on_delete=models.PROTECT)
+#  payment_amount = models.IntegerField(null=False)
 
 class favorite(models.Model):
   user_id = models.ForeignKey(user_info, on_delete=models.CASCADE)
