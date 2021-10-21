@@ -1,15 +1,74 @@
-{% extends "main/layout.html" %} 
+{% extends "main/layout.html" %}
 
 {% block mainblock %}
-  <h1>案件投稿画面</h1>
+
+  {% comment %} <h1>案件投稿画面</h1>
   <table>
     <form action="{% url 'main:post' %}" method="post" enctype="multipart/form-data">
-      {% csrf_token %} 
+      {% csrf_token %}
       {{ form.as_table }}
       <tr>
         <td></td>
         <td><input type="submit" value="投稿する" /></td>
       </tr>
     </form>
-  </table>
+  </table> {% endcomment %}
+
+  <div class="wrapper">
+    <form action="{% url 'main:post' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+      <div>
+        <label for="title">タイトル: </label>
+        <input type="text" id="title" name="title" maxlength="100" required>
+      </div>
+      <div>
+        <label for="departure_place">出発地: </label>
+        <input type="text" id="departure_place" name="departure_place" maxlength="30" required>
+      </div>
+      <div>
+        <label for="destination_place">目的地: </label>
+        <input type="text" id="destination_place" name="destination_place" maxlength="30" required>
+      </div>
+      <div>
+        <label for="delivery_date">配達希望日: </label>
+        <input type="date" id="delivery_date" name="delivery_date" required>
+      </div>
+      <div>
+        <label for="asking_price">希望料金(円): </label>
+        <input type="number" id="asking_price" name="asking_price" maxlength="7" required>
+      </div>
+      <div>
+        <label for="text">依頼詳細: </label>
+        <textarea id="text" name="text" required></textarea>
+      </div>
+      <div class="upload">
+        <label for="photo">画像アップロード: </label>
+        <label class="upload-label">
+          ファイルを選択
+          <input type="file" id="photo" name="photo" accept="image/*" onchange="previewImage(this);">
+        </label>
+      </div>
+      <img id="preview"></img>
+
+      <input type="submit" class="button" value="投稿する">
+    </form>
+  </div>
+
+
+  <script>
+  {% comment %} 昨日以前の日付を選択不可に設定 {% endcomment %}
+    var today = new Date().toISOString().split('T')[0];
+    document.getElementsByName("delivery_date")[0].setAttribute('min', today);
+
+  {% comment %} 画像のプレビューイメージ {% endcomment %}
+    function previewImage(obj) {
+      var fileReader = new FileReader();
+      fileReader.onload = (function() {
+        document.getElementById('preview').src = fileReader.result;
+      });
+      fileReader.readAsDataURL(obj.files[0]);
+    }
+  </script>
+
 {% endblock %}

@@ -7,9 +7,10 @@ from django.utils import timezone
 # Create your models here.
 class user_info(models.Model):
   user_name = models.ForeignKey(User, on_delete=models.CASCADE)
-  is_driver = models.BooleanField(default=False, null=False)
+  is_driver = models.BooleanField(default=False)
   region = models.CharField(max_length=50, null=False)
   total_socore = models.FloatField(max_length=50)
+  total_number = models.FloatField(max_length=50, default=1)
 
 class requests(models.Model):
   client_id = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -32,6 +33,10 @@ class messages(models.Model):
   user_id = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
   post_id = models.ForeignKey(requests, on_delete=models.CASCADE)
   text = models.TextField(max_length=1000, null=False)
+
+class matchdriver(models.Model):
+  driver_id = models.ForeignKey(User, on_delete=models.CASCADE)
+  post_id = models.ForeignKey(requests, on_delete=models.CASCADE)
 
 # class payment(models.Model):
 #  post_id = models.ForeignKey(requests, on_delete=models.PROTECT)

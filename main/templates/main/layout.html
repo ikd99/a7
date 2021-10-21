@@ -5,12 +5,15 @@
   <head>
     <meta charset="utf-8" />
     <title>MatchingDjangoApp</title>
-    <link rel="stylesheet" href="{% static "css/styles.css" %}" />
+
     <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
     />
     {% bootstrap_css %} {% bootstrap_javascript %}
+
+    {% comment %} bootstrap_cssの影響でstyle.cssがうまく反映されない問題があるので、読み込み順を変更 {% endcomment %}
+    <link rel="stylesheet" href="{% static "css/styles.css" %}" />
   </head>
 
   <body>
@@ -40,33 +43,44 @@
         <ul>
           <li>
             <a href="{% url 'main:index' %}">
-              <span class="material-icons" id="home"> home </span>
+              <span class="material-icons" id="home">
+                home
+              </span>
             </a>
           </li>
           <li>
             <a href="{% url 'main:post' %}">
-              <span class="material-icons" id="post_add"> post_add </span>
+              <span class="material-icons" id="post_add">
+                post_add
+              </span>
             </a>
           </li>
           <li>
             <a href="{% url 'main:log' %}">
-              <span class="material-icons" id="history"> history </span>
+              <span class="material-icons" id="history">
+                history
+              </span>
             </a>
           </li>
           <li>
             <a href="{% url 'main:profile' %}">
-              <span class="material-icons" id="person"> person </span>
+              <span class="material-icons" id="person">
+                person
+              </span>
             </a>
           </li>
         </ul>
       </nav>
     </footer>
 
+
+    {% comment %} タブメニュー {% endcomment %}
     <script
       src="https://code.jquery.com/jquery-3.4.1.min.js"
       integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
       crossorigin="anonymous"
     ></script>
+
     <script src="{% static 'javascript/main.js' %}"></script>
   </body>
 </html>

@@ -1,7 +1,8 @@
-{% extends "main/layout.html" %} 
+{% extends "main/layout.html" %}
 
 {% block mainblock %}
-  <h1>詳細画面</h1>
+  {% comment %} <h1>依頼詳細画面</h1> {% endcomment %}
+
   <form action="{% url 'main:detail' id %}" method="post">
     <p>この案件とマッチングしたい場合は、チェックを入れてください</p>
     {% csrf_token %}
@@ -20,6 +21,7 @@
         <td>{{ post.departure_place }}</td>
         <td>{{ post.destination_place }}</td>
         <td>{{ post.delivery_date }}</td>
+        <td>{{ post.asking_price }}</td>
         <td>{{ post.text }}</td>
       </tr>
     </table>
@@ -30,4 +32,5 @@
       {% endif %}
       {% endfor %}
   </form>
+
 {% endblock %}
