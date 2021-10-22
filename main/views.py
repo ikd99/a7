@@ -231,3 +231,13 @@ def evaluation(request, num):
             c_user.save()
         return redirect('main:log')
     return render(request, 'main/evaluation.html', my_dict)
+
+@login_required
+def update(request, num):
+    print(num)
+    return render(request, 'main/update.html')
+
+@login_required
+def delete(request, num):
+    print(num)
+    return render(request, 'main/delete.html')

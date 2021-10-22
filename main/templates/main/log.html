@@ -28,6 +28,8 @@
                 <td>{{ post.destination_place }}</td>
                 <td>{{ post.delivery_date }}</td>
                 <td>{{ post.text }}</td>
+                <td><a href="{% url 'main:update' post.id %}">編集</a></td>
+                <td><a href="{% url 'main:delete' post.id %}">削除</a></td>
             </tr>
             {% endfor %}
         </table>
