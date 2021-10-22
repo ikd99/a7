@@ -115,7 +115,6 @@ def log(request):
     # ログインユーザーのUser_info
     login = user_info.objects.get(user_name=user)
     header = ['ユーザー','タイトル', '目的地','出発地','配達日時','詳細']
-    # d_header = ['タイトル','目的地','出発地','配達日時','詳細']
     if (login.is_driver == True): # ドライバーの時
         match_log = matchdriver.objects.all().filter(driver_id=user)
         print(user)
@@ -142,7 +141,6 @@ def log(request):
             ).save()
         dr = driver_requests.objects.filter(md_id=user).values('title', 'matching_complete', 'request_complete', 'payment', 'text', 'departure_place', 'destination_place', 'delivery_date', 'asking_price').distinct()
         print(dr)
-        # before_posts = dr.all().filter(md_id=user, matching_complete=False)
         matching_posts = dr.all().filter(md_id=user, matching_complete=True, request_complete=False)
         after_posts = dr.all().filter(md_id=user, request_complete=True)
         header.pop(0)
@@ -161,7 +159,6 @@ def log(request):
 @login_required
 def detail(request, num):
     posts = requests.objects.all().filter(id=num)
-    # post_room = requests.objects.get(id=num)
     print(num)
     header = ['ユーザー','タイトル','目的地','出発地','配達日時','詳細']
     my_dict = {
