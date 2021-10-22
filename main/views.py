@@ -118,8 +118,11 @@ def log(request):
     # d_header = ['タイトル','目的地','出発地','配達日時','詳細']
     if (login.is_driver == True): # ドライバーの時
         match_log = matchdriver.objects.all().filter(driver_id=user)
+        print(user)
+        print(match_log)
         for list in match_log:
-            log_all = requests.objects.get(id=list.id)        
+            log_all = requests.objects.get(id=list.id)   
+            print(log_all)     
             driver_requests(
                 md_id=user,
                 title = log_all.title,
@@ -138,7 +141,7 @@ def log(request):
                 photo = log_all.photo,
             ).save()
         dr = driver_requests.objects.filter(md_id=user).values('title', 'matching_complete', 'request_complete', 'payment', 'text', 'departure_place', 'destination_place', 'delivery_date', 'asking_price').distinct()
-        # print(dr)
+        print(dr)
         before_posts = dr.all().filter(md_id=user, matching_complete=False)
         matching_posts = dr.all().filter(md_id=user, matching_complete=True, request_complete=False)
         after_posts = dr.all().filter(md_id=user, request_complete=True)
@@ -234,25 +237,30 @@ def evaluation(request, num):
 
 @login_required
 def update(request, num):
-    # post = requests.objects.get(id=num)
+    post = requests.objects.get(id=num)
+    form = PostForm(initial={
+        'title': post.title,
+        'text': post.text,
+        'departure_place': post.departure_place,
+        'destination_place': post.destination_place,
+        'delivery_date': post.delivery_date,
+        'asking_price': post.asking_price,
+        'photo': post.photo,
+    })
     update_dict = {
-        # 'form': PostForm(initial=post),
-        # 'post': post,
+        'form': form,
+        'post': post,
         'id': num,
     }
     if (request.method == "POST"):
-        # my_dict['form'] = PostForm(request.POST, request.FILES)
-        user = request.user
-        # requests(
-        #     client_id=user,
-        #     title=request.POST.get('title'),
-        #     text=request.POST.get('text'),
-        #     departure_place=request.POST.get('departure_place'),
-        #     destination_place=request.POST.get('destination_place'),
-        #     delivery_date=request.POST.get('delivery_date'),
-        #     asking_price=request.POST.get('asking_price'),
-        #     photo=request.FILES.get('photo'),
-        # ).save()
+        post.title = request.POST.get('title')
+        post.text = request.POST.get('text')
+        post.departure_place = request.POST.get('departure_place')
+        post.destination_place = request.POST.get('destination_place')
+        post.delivery_date = request.POST.get('delivery_date')
+        post.asking_price = request.POST.get('asking_price')
+        post.photo = request.FILES.get('photo')
+        post.save()
         return redirect('main:log')
     return render(request, 'main/update.html', update_dict)
 
