@@ -10,12 +10,29 @@ from django.core.exceptions import ObjectDoesNotExist
 
 def index(request):
     posts = requests.objects.all().filter(matching_complete=False)
-    header = ['ユーザー','タイトル','目的地','出発地','配達日時','詳細']
-    my_dict2 = {
+    regional_posts = {
+        'posts': posts,
+    }
+    return render(request, 'main/index.html', regional_posts)
+
+@login_required
+def detail(request, num):
+    posts = requests.objects.all().filter(id=num)
+    # print(num)
+    header = ['ユーザー','タイトル','目的地','出発地','配達日時','希望料金(円)','詳細']
+    my_dict = {
+        'id': num,
         'posts': posts,
         'header': header,
+        'form': StatusForm,
     }
-    return render(request, 'main/index.html', my_dict2)
+
+    if (request.method == "POST"):
+        match = requests.objects.get(id=num)
+        match.matching_complete = True
+        match.save()
+        return redirect('main:chat',  num=num)
+    return render(request, 'main/detail.html', my_dict)
 
 @login_required
 def post(request):
@@ -38,8 +55,9 @@ def post(request):
             photo=request.FILES.get('photo'),
         )
         post.save()
-        return redirect('main:post')
-    return render(request, 'main/post.html', my_dict)
+        return redirect('main:log')
+    return render(request, 'main/post.html')
+
 
 @login_required
 def profile(request):
@@ -57,7 +75,7 @@ def profile(request):
             flag = True
         default_eval = 3.0
         post = user_info(
-            user_name=user, 
+            user_name=user,
             is_driver=flag,
             region=request.POST.get('region'),
             total_socore=default_eval,
@@ -66,9 +84,6 @@ def profile(request):
         return redirect('main:profile')
     return render(request, "main/profile.html", use_dict)
 
-@login_required
-def getMyPage(request):
-    return render(request, 'main/mypage.html')
 
 @login_required
 def chat(request, num):
@@ -90,8 +105,6 @@ def chat(request, num):
         return redirect('main:chat',  num=num)
     return render(request, 'main/chat.html', my_dict)
 
-def message(request):
-    return render(request, 'main/message.html')
 
 @login_required
 def payment(request, num):
@@ -158,6 +171,7 @@ def log(request):
         'login': login,
     }
     return render(request, 'main/log.html', my_dict)
+
 
 @login_required
 def detail(request, num):
