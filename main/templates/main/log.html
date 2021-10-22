@@ -28,8 +28,20 @@
                 <td>{{ post.destination_place }}</td>
                 <td>{{ post.delivery_date }}</td>
                 <td>{{ post.text }}</td>
-                <td><a href="{% url 'main:update' post.id %}">編集</a></td>
-                <td><a href="{% url 'main:delete' post.id %}">削除</a></td>
+                <td>
+                    <a href="{% url 'main:update' post.id %}">
+                        <button>
+                            編集
+                        </button>
+                    </a>
+                </td>
+                <td>
+                    <a href="{% url 'main:delete' post.id %}">
+                        <button>
+                            削除
+                        </button>
+                    </a>
+                </td>
             </tr>
             {% endfor %}
         </table>
@@ -51,7 +63,13 @@
                 <td>{{ post.destination_place }}</td>
                 <td>{{ post.delivery_date }}</td>
                 <td>{{ post.text }}</td>
-                <td><a href="{% url 'main:chat' post.id %}">チャットルーム</a></td>
+                <td>
+                    <a href="{% url 'main:chat' post.id %}">
+                        <button>
+                            チャットルーム
+                        </button>
+                    </a>
+                </td>
             </tr>
             {% endfor %}
         </table>

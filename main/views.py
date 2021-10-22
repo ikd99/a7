@@ -234,10 +234,40 @@ def evaluation(request, num):
 
 @login_required
 def update(request, num):
-    print(num)
-    return render(request, 'main/update.html')
+    # post = requests.objects.get(id=num)
+    update_dict = {
+        # 'form': PostForm(initial=post),
+        # 'post': post,
+        'id': num,
+    }
+    if (request.method == "POST"):
+        # my_dict['form'] = PostForm(request.POST, request.FILES)
+        user = request.user
+        # requests(
+        #     client_id=user,
+        #     title=request.POST.get('title'),
+        #     text=request.POST.get('text'),
+        #     departure_place=request.POST.get('departure_place'),
+        #     destination_place=request.POST.get('destination_place'),
+        #     delivery_date=request.POST.get('delivery_date'),
+        #     asking_price=request.POST.get('asking_price'),
+        #     photo=request.FILES.get('photo'),
+        # ).save()
+        return redirect('main:log')
+    return render(request, 'main/update.html', update_dict)
 
 @login_required
 def delete(request, num):
-    print(num)
-    return render(request, 'main/delete.html')
+    header = ['ユーザー','タイトル','目的地','出発地','配達日時','詳細']
+    message = ''
+    post = requests.objects.get(id=num)
+    if (request.method == 'POST'):
+        post.delete()
+        return redirect('main:log')
+    delete_dict = {
+        'header': header,
+        'id': num,
+        'post': post,
+        'message': message,
+    }
+    return render(request, 'main/delete.html', delete_dict)
