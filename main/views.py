@@ -142,7 +142,7 @@ def log(request):
             ).save()
         dr = driver_requests.objects.filter(md_id=user).values('title', 'matching_complete', 'request_complete', 'payment', 'text', 'departure_place', 'destination_place', 'delivery_date', 'asking_price').distinct()
         print(dr)
-        before_posts = dr.all().filter(md_id=user, matching_complete=False)
+        # before_posts = dr.all().filter(md_id=user, matching_complete=False)
         matching_posts = dr.all().filter(md_id=user, matching_complete=True, request_complete=False)
         after_posts = dr.all().filter(md_id=user, request_complete=True)
         header.pop(0)
