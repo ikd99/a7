@@ -15,24 +15,6 @@ def index(request):
     }
     return render(request, 'main/index.html', regional_posts)
 
-@login_required
-def detail(request, num):
-    posts = requests.objects.all().filter(id=num)
-    # print(num)
-    header = ['ユーザー','タイトル','目的地','出発地','配達日時','希望料金(円)','詳細']
-    my_dict = {
-        'id': num,
-        'posts': posts,
-        'header': header,
-        'form': StatusForm,
-    }
-
-    if (request.method == "POST"):
-        match = requests.objects.get(id=num)
-        match.matching_complete = True
-        match.save()
-        return redirect('main:chat',  num=num)
-    return render(request, 'main/detail.html', my_dict)
 
 @login_required
 def post(request):
@@ -137,7 +119,7 @@ def log(request):
     if (login.is_driver == True): # ドライバーの時
         match_log = matchdriver.objects.all().filter(driver_id=user)
         for list in match_log:
-            log_all = requests.objects.get(id=list.post_id)        
+            log_all = requests.objects.get(id=list.id)        
             driver_requests(
                 md_id=user,
                 title = log_all.title,
@@ -156,7 +138,7 @@ def log(request):
                 photo = log_all.photo,
             ).save()
         dr = driver_requests.objects.filter(md_id=user).values('title', 'matching_complete', 'request_complete', 'payment', 'text', 'departure_place', 'destination_place', 'delivery_date', 'asking_price').distinct()
-        print(dr)
+        # print(dr)
         before_posts = dr.all().filter(md_id=user, matching_complete=False)
         matching_posts = dr.all().filter(md_id=user, matching_complete=True, request_complete=False)
         after_posts = dr.all().filter(md_id=user, request_complete=True)
