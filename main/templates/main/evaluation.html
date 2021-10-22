@@ -3,7 +3,7 @@
 {% block mainblock %}
   <h1>評価画面</h1>
   <h2>取引相手の評価を選択して送信してください</h2>
-  <p>５段階評価</p>
+  <p>５段階評価: 1~5までの整数を入力してください</p>
   <form action="{% url 'main:evaluation' id %}" method="post">
     {% csrf_token %} 
     {{ form.as_table }}
