@@ -22,7 +22,7 @@ class EvaForm(forms.Form):
 def wrap_boolean_check(v):
     return not (v is False or v is None or v == '' or v == 0)
 class StatusForm(forms.Form):
-    確認しました = forms.BooleanField(
+    この依頼とマッチングしたい場合はチェックを入れてください = forms.BooleanField(
         initial=0,
         widget=forms.CheckboxInput(check_test=wrap_boolean_check)
     )

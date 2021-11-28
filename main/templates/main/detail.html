@@ -2,35 +2,50 @@
 
 {% block mainblock %}
   {% comment %} <h1>依頼詳細画面</h1> {% endcomment %}
+  <div>
+    <a href="{% url 'main:index' %}">
+      <span class="material-icons" id="chevron_left">
+        chevron_left
+      </span>
+    </a>
+  </div>
 
   <form action="{% url 'main:detail' id %}" method="post">
-    <p>この案件とマッチングしたい場合は、チェックを入れてください</p>
     {% csrf_token %}
-    {{ form }}
-    <input type="submit" value="マッチング開始">
-    <table>
-      <tr>
-        {% for col in header %}
-        <th>{{ col }}</th>
-        {% endfor %}
-      </tr>
-      {% for post in posts reversed %}
-      <tr>
-        <td>{{ post.client_id }}</td>
-        <td>{{ post.title }}</td>
-        <td>{{ post.departure_place }}</td>
-        <td>{{ post.destination_place }}</td>
-        <td>{{ post.delivery_date }}</td>
-        <td>{{ post.asking_price }}</td>
-        <td>{{ post.text }}</td>
-      </tr>
-    </table>
+
+    {% for post in posts reversed %}
       {% if post.photo %}
         <div>
           <img src="{{ post.photo.url }}" width="50%" height="50%"/>
         </div>
       {% endif %}
-      {% endfor %}
+
+{% comment %} とりあえずここから、テーブルタグを削除 {% endcomment %}
+      <table>
+        <tr>
+          {% for col in header %}
+          <th>{{ col }}</th>
+          {% endfor %}
+        </tr>
+
+        <tr>
+          <td>{{ post.title }}</td>
+          <td>{{ post.post_time　}}</td>
+          <td>{{ post.departure_place }}</td>
+          <td>{{ post.destination_place }}</td>
+          <td>{{ post.delivery_date }}</td>
+          <td>{{ post.asking_price }}</td>
+          <td>{{ post.text }}</td>
+          <td>{{ post.client_id }}</td>
+          {% comment %} ここに依頼者の評価が入ります {% endcomment %}
+        </tr>
+      </table>
+    {% endfor %}
+
+    {% comment %} 以下、タクシードライバーだけに表示したい項目 {% endcomment %}
+    {% comment %} <p>この依頼とマッチングしたい場合は、チェックを入れてください</p> {% endcomment %}
+    {{ form }}
+    <input type="submit" value="マッチング開始">
   </form>
 
 {% endblock %}
