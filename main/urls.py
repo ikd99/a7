@@ -12,5 +12,6 @@ urlpatterns = [
   path('evaluation/<int:num>', views.evaluation, name='evaluation'),
   path('request_complete/<int:num>', views.request_complete, name='request_complete'),
   path("payment/<int:num>", views.payment, name = "payment"),
-
+  path('update/<int:num>', views.update, name='update'),
+  path('delete/<int:num>', views.delete, name='delete'),
 ]

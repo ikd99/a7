@@ -1,0 +1,30 @@
+{% extends "main/layout.html" %}
+
+{% block mainblock %}
+  <h1>削除画面</h1>
+  <table>
+    <tr>
+        {% for col in header %}
+        <th>{{ col }}</th>
+        {% endfor %}
+    </tr>
+
+    <tr>
+        <td>{{ post.client_id }}</td>
+        <td>{{ post.title }}</td>
+        <td>{{ post.departure_place }}</td>
+        <td>{{ post.destination_place }}</td>
+        <td>{{ post.delivery_date }}</td>
+        <td>{{ post.text }}</td>
+    </tr>
+  </table>
+  {% if post.photo %}
+    <div>
+      <img src="{{ post.photo.url }}" width="50%" height="50%"/>
+    </div>
+  {% endif %}
+  <form action="{% url 'main:delete' id %}" method="post">
+    {% csrf_token %}
+    <input type="submit" value="削除">
+  </form>
+{% endblock %}
